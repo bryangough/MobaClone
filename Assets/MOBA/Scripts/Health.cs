@@ -9,13 +9,14 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
   [SyncVar(hook = "OnChangeHealth")]
   public int currentHealth = maxHealth;
 
+  //public GameObject healthBarGameObject;
   public RectTransform healthBar;
 
   public bool destroyOnDeath;
 
   public override void OnStartClient()
   {
-    healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+    //healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
   }
 
   public void TakeDamage(int amount)
@@ -41,7 +42,7 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
 
   void OnChangeHealth(int health)
   {
-    healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+    //healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
   }
 
   [ClientRpc]

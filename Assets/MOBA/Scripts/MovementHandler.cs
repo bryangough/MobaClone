@@ -8,70 +8,107 @@ public class MovementHandler : MonoBehaviour {
 	protected float stateTimer = 5;
 	public MOVEMENT_STATE currentState = MOVEMENT_STATE.IDLE;
 	//Animator animator;
-	public Transform myTransform;
-	protected Vector3 wanderPosition = new Vector3();
+	//public Transform myTransform;
+	protected Vector3 targetLocation;
 	public Transform target;
 	public float moveSpeed = 0.1f; //move speed
-	public float distanceFromTarget = 6.0f;
+	public float distanceFromTarget = 0.2f;
 	protected Vector3 facing;
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		doUpdate();
 	}
+	public void moveToTarget(Transform target)
+	{
+		currentState = MOVEMENT_STATE.TARGET;
+		this.target = target;
+	}
+	public void moveToLocation(Vector3 targetLocation)
+	{
+		currentState = MOVEMENT_STATE.LOCATION;
+		this.targetLocation = targetLocation;
+		this.target = null;
+		facing = targetLocation - transform.position;
+		
+		facing.Normalize();
+		facing.z = 0;
+		rotateBody();
+		//float rot_z = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+		//facing = transform.TransformDirection (-Vector3.forward);
 
+		Debug.Log(facing);
+	}
+	public void stopMoving()
+	{
+		currentState = MOVEMENT_STATE.IDLE;
+	}
+	public void rotateBody()
+	{
+		transform.rotation = Quaternion.LookRotation(-Vector3.forward,  facing);
+	}
 	protected void doUpdate () 
 	{
 		if(this.isAlive)
 		{
 			stateTimer -= Time.deltaTime;
 
-			if(currentState==MOVEMENT_STATE.CHASE)
+			if(currentState==MOVEMENT_STATE.TARGET)
 			{
 				if (stateTimer>0)
 				{
-					Vector3 dir = myTransform.position - target.position;
-					dir.z = 0;
-					if(dir.sqrMagnitude>=distanceFromTarget*distanceFromTarget)
+					facing = transform.position - target.position;
+					facing.z = 0;
+					//too far
+					if(facing.sqrMagnitude>=distanceFromTarget*distanceFromTarget)
 					{
 						//callback 
 						//enterWander();
 						return;
 					}
+					//too close
+					if(facing.sqrMagnitude<distanceFromTarget*distanceFromTarget)
+					{
+						currentState = MOVEMENT_STATE.IDLE;
+						//getWanderSpot();//callback 
+					}
 					//myTransform.rotation = Quaternion.LookRotation(Vector3.forward,  dir);
-					dir.Normalize();
+					facing.Normalize();
 					//should still get this to work, or remove rigid bodies and do everything with code?
 					//rigidbody2D.AddForce(-dir * chaseSpeed * Time.deltaTime);
-					myTransform.position += -dir * moveSpeed * Time.deltaTime;
+					transform.position += -facing * moveSpeed * Time.deltaTime;
+					rotateBody();
 				}
 				else
 				{
 					//enterWander();//callback 
 				}
 			}
-			else if(currentState==MOVEMENT_STATE.WANDER)
+			else if(currentState==MOVEMENT_STATE.LOCATION)
 			{
-				if ( stateTimer>0 )
-				{
-					myTransform.position += facing * moveSpeed * Time.deltaTime;
-					Vector3 dist = wanderPosition-myTransform.position;
+				//if ( stateTimer>0 )
+				//{
+					transform.position += facing * moveSpeed * Time.deltaTime;
+					Vector3 dist = targetLocation-transform.position;
 					dist.z = 0;
-					if(dist.sqrMagnitude>=distanceFromTarget*distanceFromTarget)
+					if(dist.sqrMagnitude<distanceFromTarget*distanceFromTarget)
 					{
+						currentState = MOVEMENT_STATE.IDLE;
 						//getWanderSpot();//callback 
 					}
-				}
-				else
-				{
+				//}
+				//else
+				//{
 					/*if(chase && Vector3.Distance(target.position, myTransform.position) < chaseDistance)
 						//enterChase();//callback 
 					else
 						//enterWander();//callback */
-				}
+				//}
 			}
 		}
 	}
