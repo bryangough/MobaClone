@@ -13,3 +13,12 @@ public enum AI_STATE
     SIT,
     WAKING
 }
+public enum POWER_TYPE
+{   
+    offensive,
+    support
+}
+public struct Power
+{
+    
+}

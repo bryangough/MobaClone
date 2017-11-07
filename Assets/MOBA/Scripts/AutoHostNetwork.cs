@@ -4,13 +4,18 @@ using UnityEngine;
 using UnityEngine.Networking;
 public class AutoHostNetwork : MonoBehaviour {
 
-	public NetworkManager manager;
+	private NetworkManager manager;
+	public bool autoStartHost = true;
 	void Awake()
 	{
 		manager = GetComponent<NetworkManager>();
 	}
  
-	void Start () {
-		manager.StartHost();	
+	void Start () 
+	{
+		if(autoStartHost)
+		{
+			manager.StartHost();
+		}
 	}
 }

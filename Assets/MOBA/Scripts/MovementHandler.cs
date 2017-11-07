@@ -42,7 +42,7 @@ public class MovementHandler : MonoBehaviour {
         //transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 		//facing = transform.TransformDirection (-Vector3.forward);
 
-		Debug.Log(facing);
+//		Debug.Log(facing);
 	}
 	public void stopMoving()
 	{

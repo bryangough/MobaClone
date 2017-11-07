@@ -235,8 +235,8 @@ GameObject:
   m_Component:
   - component: {fileID: 650349437}
   - component: {fileID: 650349439}
-  - component: {fileID: 650349438}
   - component: {fileID: 650349440}
+  - component: {fileID: 650349438}
   m_Layer: 0
   m_Name: Network
   m_TagString: Untagged
@@ -263,12 +263,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 650349436}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 060d5a6b0fcd14c7bb687f8d159f9e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  autoStartHost: 1
 --- !u!114 &650349439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,25 +478,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec1394308d845486b89844ef9ae24d5e, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1326736378 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1423118945524760, guid: ec1394308d845486b89844ef9ae24d5e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1994886152}
---- !u!114 &1326736383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1326736378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d942c3f1a2df4714bc1c24abc80892d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  healthBar: {fileID: 0}
-  destroyOnDeath: 0
 --- !u!1 &1416795840 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1423118945524760, guid: ec1394308d845486b89844ef9ae24d5e,
