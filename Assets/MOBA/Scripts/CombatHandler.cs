@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatHandler : MonoBehaviour {
-
-
+public class CombatHandler : MonoBehaviour 
+{
 	TargetableObject _targetedObject;
 	// Use this for initialization
 	public TargetableObject target
@@ -21,7 +20,7 @@ public class CombatHandler : MonoBehaviour {
 	{
 		if( _targetedObject != null )	
 		{
-
+			//attach target with basic shot.
 		}
 	}
 }

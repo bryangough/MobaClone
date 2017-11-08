@@ -21,6 +21,7 @@ MonoBehaviour:
   clipsize: 6
   type: 
   cost: 4
+  bullet: {fileID: 1338852124406488, guid: ca5869a38cc4143b384b1c4bb78b102c, type: 2}
   attackType: 
   cooldown: 0
   description: 

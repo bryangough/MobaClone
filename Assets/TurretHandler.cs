@@ -5,12 +5,19 @@ using UnityEngine;
 public class TurretHandler : MonoBehaviour {
 	// Use this for initialization
 	CombatHandler combatHandler;
-	public Transform turret;
+	Animator animator;
+	//public Transform turret;
 	public float offset = 90f;
-	//public GameObject parent;
+	public Transform parent;
 	void Start () {
-		combatHandler = this.GetComponent<CombatHandler>();
-		//parent = this.gameObject.transform.parent;
+		
+		parent = this.gameObject.transform.parent;
+		combatHandler = this.GetComponentInParent<CombatHandler>();
+		animator = this.GetComponent<Animator>();
+	}
+	public void fireCannon()
+	{
+		animator.SetTrigger("fire");
 	}
 	
 	// Update is called once per frame
@@ -19,19 +26,19 @@ public class TurretHandler : MonoBehaviour {
 		//center
 		if( combatHandler.target == null)
 		{
-			if( transform.rotation != Quaternion.identity )
+			if( transform.rotation != parent.rotation )
 			{
-				transform.rotation = Quaternion.identity;
+				transform.rotation = parent.rotation;
 			}
 		}
 		else
 		{
 			Transform target = combatHandler.target.transform;
-			var delta = target.position - this.transform.position;
+			var delta = target.position - parent.transform.position;
  			var angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
 			 angle += offset;
  			var rotation = Quaternion.Euler(0, 0, angle);
-			turret.rotation = rotation;
+			transform.rotation = rotation;
 		}
 
 	}

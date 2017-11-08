@@ -16,4 +16,16 @@ public class PowerHandler : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	public BasicPower usePower(int id)
+	{
+		//if power exists
+		//if power off-cooldown
+		//
+		if(true)
+		{
+			return null;
+		}
+		return powers[id];
+	}
 }

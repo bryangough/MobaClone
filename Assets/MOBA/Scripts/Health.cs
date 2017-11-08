@@ -9,7 +9,8 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
   [SyncVar(hook = "OnChangeHealth")]
   public int currentHealth = maxHealth;
 
-  //public GameObject healthBarGameObject;
+//Healthbar should be object pooled
+  public GameObject healthBarGameObject;
   public RectTransform healthBar;
 
   public bool destroyOnDeath;

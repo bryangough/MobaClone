@@ -3,27 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerInputHandler : NetworkBehaviour {
+public class PlayerInputHandler : NetworkBehaviour 
+{
 
 	MovementHandler movementHandler;
 	CombatHandler combatHandler;
 	public GameObject touched;
-	public PowerHandler powers;
+	public PowerHandler powerHandler;
+
+	public bool altPressed = false;
+	public bool ctrlPressed = false;
+	public bool shiftPressed = false;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		movementHandler = this.GetComponent<MovementHandler>();
 		combatHandler = this.GetComponent<CombatHandler>();
+		powerHandler = this.GetComponent<PowerHandler>();
 	}
 	public override void OnStartLocalPlayer()
 	{
 		
 	}
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		if (!isLocalPlayer)
       		return;
-		//
+//these should be changed to InputManager for easier remapping.
+		/*if (Input.GetButtonDown("Shift")) {
+			shiftPressed = true;
+		}
+		else if (Input.GetButtonUp("Shift")) {
+			shiftPressed = false;
+		}*/
+		// Power hotkeys
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
 			Debug.Log("Q");
@@ -43,7 +58,6 @@ public class PlayerInputHandler : NetworkBehaviour {
 		//
 		if (Input.GetKeyDown(KeyCode.S))
 		{
-			//stop
 			//stop attack and stop moving
 			Debug.Log("S");
 		}
@@ -76,6 +90,4 @@ public class PlayerInputHandler : NetworkBehaviour {
 			}
 		}
 	}
-
-
 }
