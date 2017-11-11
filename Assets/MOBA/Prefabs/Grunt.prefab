@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 61560880392300360}
   - component: {fileID: 114477107890558648}
   - component: {fileID: 114678088181246668}
+  - component: {fileID: 114614083757635148}
+  - component: {fileID: 114333145517535390}
   m_Layer: 8
   m_Name: Grunt
   m_TagString: Untagged
@@ -39,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1423118945524760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.41, y: -2.5, z: 0}
+  m_LocalPosition: {x: -1.08, y: -1.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -102,6 +104,21 @@ MonoBehaviour:
     i15: 94
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114333145517535390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1423118945524760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0e3adb67560429386d8eb179d25c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  target: {fileID: 0}
+  moveSpeed: 0.1
+  distanceFromTarget: 0.2
 --- !u!114 &114477107890558648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,6 +134,19 @@ MonoBehaviour:
   healthBarGameObject: {fileID: 0}
   healthBar: {fileID: 0}
   destroyOnDeath: 0
+--- !u!114 &114614083757635148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1423118945524760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9db3673a3864b61a00afd1d87cc921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+  isActive: 1
 --- !u!114 &114678088181246668
 MonoBehaviour:
   m_ObjectHideFlags: 1
