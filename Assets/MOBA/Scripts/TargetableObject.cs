@@ -13,4 +13,9 @@ public class TargetableObject : MonoBehaviour
 		health = this.gameObject.GetComponent<Health>();
         combatHandler = this.gameObject.GetComponent<CombatHandler>();
 	}
+
+    public bool isAlive()
+    {
+        return combatHandler.isActive;
+    }
 }

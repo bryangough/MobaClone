@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class CombatHandler : MonoBehaviour 
 {
+	public Team team;
 	TargetableObject _targetedObject;
+
+	public bool isActive = true;
 	// Use this for initialization
+	[SerializeField]
 	public TargetableObject target
 	{
 		get { return _targetedObject; }
