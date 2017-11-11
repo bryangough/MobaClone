@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class WaypointMover : MovementHandler {
 
@@ -9,6 +10,8 @@ public class WaypointMover : MovementHandler {
 	public Vector3 offset;
 
 	void Start () {
+		if( !isServer )
+			return;
 		nextPoint = path.getFirstPoint();
 		if( nextPoint!=null )
 		{
@@ -22,11 +25,17 @@ public class WaypointMover : MovementHandler {
 		{
 			nextPoint = nextPoint.next;
 			moveToLocation( nextPoint.transform.position + offset,  atWaypoint);
-			Debug.Log("next");
 		}
 		else
 		{
-			Debug.Log("done!");
+		}
+	}
+
+	void continueToWaypoint()
+	{
+		if( nextPoint != null)
+		{
+			moveToLocation( nextPoint.transform.position + offset,  atWaypoint);
 		}
 	}
 	

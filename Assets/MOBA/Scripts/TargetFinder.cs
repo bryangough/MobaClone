@@ -8,7 +8,7 @@ public class TargetFinder : NetworkBehaviour {
 	public bool searchForTarget = true;
 	public float checkDelay = 5;
 	public float delayCounter = 0;
-	public LayerMask layerMask;
+	
 	CombatHandler combatHandler;
 	void Start()
 	{
@@ -29,7 +29,7 @@ public class TargetFinder : NetworkBehaviour {
 			if(delayCounter > checkDelay)
 			{
 				//will add priority system later
-				Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, layerMask);
+				Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, combatHandler.otherTeamLayerMask.value);
 				/*for (int x=0; x<colliders.Length; x++)
 				{
 					//colliders

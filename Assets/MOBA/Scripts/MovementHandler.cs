@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MovementHandler : MonoBehaviour {
+public class MovementHandler : NetworkBehaviour {
 
 	bool isAlive = true;
 	protected float stateTimer = 5;
@@ -23,10 +24,13 @@ public class MovementHandler : MonoBehaviour {
 	}
 	protected void doStart()
 	{
-
+		if( !isServer )
+			return;
 	}
 	// Update is called once per frame
 	void Update () {
+		if( !isServer )
+			return;
 		doUpdate();
 	}
 	public void moveToTarget(Transform target, MoveCallback callback)

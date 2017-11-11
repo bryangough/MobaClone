@@ -20,13 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4596024370518344}
   - component: {fileID: 212096923915827530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cannonDischarge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1508009873932526
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,13 +54,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4791178480177576}
   - component: {fileID: 212925352584316218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: towerMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1593268412759890
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1593268412759890}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 4.11, y: 1.93, z: -1}
+  m_LocalPosition: {x: 0.13, y: 1.69, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4515143794322494}
@@ -253,21 +253,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 1
+  myTeamLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  otherTeamLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   isActive: 1
+  target: {fileID: 0}
 --- !u!114 &114602070931739708
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1593268412759890}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1092ff873c0a9426690b7532bb99e9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRange: 5
-  aiStep: 1
+  targetRange: 3
+  movementHandler: {fileID: 0}
   isBusy: 0
+  delayCounter: 0
+  checkDelay: 4
 --- !u!114 &114712176836919610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,9 +288,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ff7c77c5a064c98a51333e1fb1e5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 20
+  radius: 2
   searchForTarget: 1
-  checkDelay: 5
+  checkDelay: 4
   delayCounter: 0
 --- !u!114 &114735716843848970
 MonoBehaviour:

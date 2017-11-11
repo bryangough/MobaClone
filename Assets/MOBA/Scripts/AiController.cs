@@ -8,7 +8,7 @@ public class AiController : NetworkBehaviour {
 
 	TargetFinder targetFinder;
 	CombatHandler combatHandler;
-
+	public MovementHandler movementHandler;
 	
 	public bool isBusy = false;
 
@@ -22,6 +22,7 @@ public class AiController : NetworkBehaviour {
 		}
 		combatHandler = this.GetComponent<CombatHandler>();
 		targetFinder = this.GetComponent<TargetFinder>();
+		movementHandler = this.GetComponent<MovementHandler>();
 	}
 	
 	// Update is called once per frame
@@ -44,8 +45,6 @@ public class AiController : NetworkBehaviour {
 	
 	public void doChecks()
 	{
-		
-
 		if(combatHandler.target != null)
 		{
 			//is target is dead, get new target
@@ -62,14 +61,27 @@ public class AiController : NetworkBehaviour {
             	float sqrLen = offset.sqrMagnitude;
 				if( sqrLen < targetRange * targetRange)
 				{
-					RaycastHit2D hit = Physics2D.Linecast(transform.position, other.position, 1 << LayerMask.NameToLayer("LeftSide"), 0);
-					if (hit.transform == other)
+					RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, other.position, combatHandler.otherTeamLayerMask.value);
+
+					//RaycastHit2D[] hits = Physics2D.RaycastAll (Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero);
+					//Debug.Log(transform.position+" "+other.position);
+					bool hitObject = false;
+					for( int x=0;x<hits.Length;x++)
+					{
+						if (hits[x].transform == other)
+						{
+							hitObject = true;
+						}
+					}
+					if (hitObject)
 					{
 						 //RaycastHit2D
 						 // attack target
 						 //Debug.Log("attack target.");
 						 //isBusy = true;
 						 //use power
+						 if(movementHandler!=null)
+						 	movementHandler.stopMoving();
 					}
 					else
 					{
