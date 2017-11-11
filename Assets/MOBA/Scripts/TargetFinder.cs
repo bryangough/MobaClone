@@ -8,9 +8,11 @@ public class TargetFinder : NetworkBehaviour {
 	public bool searchForTarget = true;
 	public float checkDelay = 5;
 	public float delayCounter = 0;
+	public LayerMask layerMask;
 	CombatHandler combatHandler;
 	void Start()
 	{
+		//layerMask = 1 << LayerMask.NameToLayer("LeftSide");
 		combatHandler = this.GetComponent<CombatHandler>();
 	}
 	// Update is called once per frame
@@ -27,7 +29,7 @@ public class TargetFinder : NetworkBehaviour {
 			if(delayCounter > checkDelay)
 			{
 				//will add priority system later
-				Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, 1 << LayerMask.NameToLayer("LeftSide") );
+				Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, 1 << layerMask);
 				/*for (int x=0; x<colliders.Length; x++)
 				{
 					//colliders

@@ -40,7 +40,7 @@ public class AiController : NetworkBehaviour {
 			doChecks();	
 		}
 	}
-
+//if isbusy - wait until attack is done or timer is done?
 	
 	public void doChecks()
 	{

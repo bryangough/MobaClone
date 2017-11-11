@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 public class GruntSpawner : NetworkBehaviour {
 	public Team team;
 	public GameObject gruntPrefab;
-	public int numberOfEnemies;
+	public PathObject path;
 
 	public override void OnStartServer()
 	{
@@ -12,7 +12,7 @@ public class GruntSpawner : NetworkBehaviour {
 
 	public void spawnWave()
 	{
-		for (int i = 0; i < numberOfEnemies; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			var spawnPosition = new Vector3(
 				Random.Range(-8.0f, 8.0f),
