@@ -29,7 +29,7 @@ public class TargetFinder : NetworkBehaviour {
 			if(delayCounter > checkDelay)
 			{
 				//will add priority system later
-				Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, 1 << layerMask);
+				Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, layerMask);
 				/*for (int x=0; x<colliders.Length; x++)
 				{
 					//colliders

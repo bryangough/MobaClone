@@ -20,7 +20,7 @@ public class GruntSpawner : NetworkBehaviour {
 				Random.Range(-8.0f, 8.0f));
 
 			GameObject grunt = (GameObject)Instantiate(gruntPrefab, spawnPosition, Quaternion.identity);
-			CombatHandler gruntObj = grunt.GetComponent<CombatHandler>();
+//			CombatHandler gruntObj = grunt.GetComponent<CombatHandler>();
 			//
 			NetworkServer.Spawn(grunt);
 		}

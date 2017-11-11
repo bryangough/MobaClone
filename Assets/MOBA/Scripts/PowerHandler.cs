@@ -26,6 +26,6 @@ public class PowerHandler : MonoBehaviour {
 		{
 			return null;
 		}
-		return powers[id];
+//		return powers[id];
 	}
 }

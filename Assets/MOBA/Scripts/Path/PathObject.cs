@@ -11,6 +11,15 @@ public class PathObject : MonoBehaviour {
 	//
 	//public string pathID = "test1";
 	//
+
+	public PathPoint getFirstPoint()
+	{
+		if(pathPoints==null)
+			return null;
+		if(pathPoints.Count==0)
+			return null;
+		return pathPoints[0];	
+	}
 	void OnDrawGizmos() {
 		Vector3 last = Vector3.zero;
 		for(int i = 0; i < pathPoints.Count; i++)

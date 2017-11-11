@@ -9,8 +9,6 @@ public class PathPoint : MonoBehaviour
 	public PathPoint next;
 	public float delay = 0f;
 	//
-	float offsetx = 0;
-	float offsety = 0;
 	void Start()
 	{
 		

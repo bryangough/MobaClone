@@ -14,35 +14,52 @@ public class MovementHandler : MonoBehaviour {
 	public float moveSpeed = 0.1f; //move speed
 	public float distanceFromTarget = 0.2f;
 	protected Vector3 facing;
+
+	public delegate void MoveCallback();
+    MoveCallback moveCallback;
 	// Use this for initialization
 	void Start () {
+		doStart();
+	}
+	protected void doStart()
+	{
 
 	}
-	
 	// Update is called once per frame
 	void Update () {
 		doUpdate();
 	}
-	public void moveToTarget(Transform target)
+	public void moveToTarget(Transform target, MoveCallback callback)
 	{
 		currentState = MOVEMENT_STATE.TARGET;
 		this.target = target;
+		moveCallback = callback;
+		doFacing(this.target.position);
+	}
+	public void moveToLocation(Vector3 targetLocation, MoveCallback callback)
+	{
+		moveCallback = callback;
+		moveToLocation( targetLocation );
 	}
 	public void moveToLocation(Vector3 targetLocation)
 	{
 		currentState = MOVEMENT_STATE.LOCATION;
 		this.targetLocation = targetLocation;
 		this.target = null;
-		facing = targetLocation - transform.position;
-		
-		facing.Normalize();
-		facing.z = 0;
-		rotateBody();
+		doFacing(this.targetLocation);
 		//float rot_z = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         //transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 		//facing = transform.TransformDirection (-Vector3.forward);
 
 //		Debug.Log(facing);
+	}
+	void doFacing(Vector3 targetLocation)
+	{
+		facing = targetLocation - transform.position;
+		
+		facing.Normalize();
+		facing.z = 0;
+		rotateBody();
 	}
 	public void stopMoving()
 	{
@@ -57,59 +74,80 @@ public class MovementHandler : MonoBehaviour {
 		if(this.isAlive)
 		{
 			stateTimer -= Time.deltaTime;
+			stateCheck();
+		}
+	}
+	protected void stateCheck()
+	{
+		if(currentState==MOVEMENT_STATE.TARGET)
+		{
+			//if (stateTimer>0)
+			//{
+				transform.position += facing * moveSpeed * Time.deltaTime;
+				Vector3 dist = target.position-transform.position;
+				dist.z = 0;
+				if(dist.sqrMagnitude<distanceFromTarget*distanceFromTarget)
+				{
+					currentState = MOVEMENT_STATE.IDLE;
+					//getWanderSpot();//callback 
+					if(moveCallback != null)
+					{
+						moveCallback();
+					}
+				}
 
-			if(currentState==MOVEMENT_STATE.TARGET)
-			{
-				if (stateTimer>0)
+				/*
+				facing = transform.position - target.position;
+				facing.z = 0;
+				//too far
+				if(facing.sqrMagnitude>=distanceFromTarget*distanceFromTarget)
 				{
-					facing = transform.position - target.position;
-					facing.z = 0;
-					//too far
-					if(facing.sqrMagnitude>=distanceFromTarget*distanceFromTarget)
-					{
-						//callback 
-						//enterWander();
-						return;
-					}
-					//too close
-					if(facing.sqrMagnitude<distanceFromTarget*distanceFromTarget)
-					{
-						currentState = MOVEMENT_STATE.IDLE;
-						//getWanderSpot();//callback 
-					}
-					//myTransform.rotation = Quaternion.LookRotation(Vector3.forward,  dir);
-					facing.Normalize();
-					//should still get this to work, or remove rigid bodies and do everything with code?
-					//rigidbody2D.AddForce(-dir * chaseSpeed * Time.deltaTime);
-					transform.position += -facing * moveSpeed * Time.deltaTime;
-					rotateBody();
+					//callback 
+					//enterWander();
+					return;
 				}
+				//too close
+				if(facing.sqrMagnitude<distanceFromTarget*distanceFromTarget)
+				{
+					currentState = MOVEMENT_STATE.IDLE;
+					//getWanderSpot();//callback 
+				}
+				//myTransform.rotation = Quaternion.LookRotation(Vector3.forward,  dir);
+				facing.Normalize();
+				//should still get this to work, or remove rigid bodies and do everything with code?
+				//rigidbody2D.AddForce(-dir * chaseSpeed * Time.deltaTime);
+				transform.position += facing * moveSpeed * Time.deltaTime;
+				rotateBody(); */
+			//}
+			//else
+			//{
+				//enterWander();//callback 
+			//}
+		}
+		else if(currentState==MOVEMENT_STATE.LOCATION)
+		{
+			//if ( stateTimer>0 )
+			//{
+				transform.position += facing * moveSpeed * Time.deltaTime;
+				Vector3 dist = targetLocation-transform.position;
+				dist.z = 0;
+				if(dist.sqrMagnitude<distanceFromTarget*distanceFromTarget)
+				{
+					currentState = MOVEMENT_STATE.IDLE;
+					if(moveCallback != null)
+					{
+						moveCallback();
+					}
+					//getWanderSpot();//callback 
+				}
+			//}
+			//else
+			//{
+				/*if(chase && Vector3.Distance(target.position, myTransform.position) < chaseDistance)
+					//enterChase();//callback 
 				else
-				{
-					//enterWander();//callback 
-				}
-			}
-			else if(currentState==MOVEMENT_STATE.LOCATION)
-			{
-				//if ( stateTimer>0 )
-				//{
-					transform.position += facing * moveSpeed * Time.deltaTime;
-					Vector3 dist = targetLocation-transform.position;
-					dist.z = 0;
-					if(dist.sqrMagnitude<distanceFromTarget*distanceFromTarget)
-					{
-						currentState = MOVEMENT_STATE.IDLE;
-						//getWanderSpot();//callback 
-					}
-				//}
-				//else
-				//{
-					/*if(chase && Vector3.Distance(target.position, myTransform.position) < chaseDistance)
-						//enterChase();//callback 
-					else
-						//enterWander();//callback */
-				//}
-			}
+					//enterWander();//callback */
+			//}
 		}
 	}
 }
