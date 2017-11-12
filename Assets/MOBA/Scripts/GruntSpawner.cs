@@ -4,6 +4,7 @@ public class GruntSpawner : NetworkBehaviour {
 	public Team team;
 	public PathObject path;
 	
+	float randomRange = 0.5f;
 	public override void OnStartServer()
 	{
 
@@ -18,8 +19,8 @@ public class GruntSpawner : NetworkBehaviour {
 		for (int i = 0; i < data.number; i++)
 		{
 			var spawnPosition = new Vector3(
-				Random.Range(-1.0f, 1.0f),
-				Random.Range(-1.0f, 1.0f),
+				Random.Range(-randomRange, randomRange),
+				Random.Range(-randomRange, randomRange),
 				0.0f);
 
 			GameObject grunt = (GameObject)Instantiate(data.unitPrefab, this.transform.position + spawnPosition, Quaternion.identity);

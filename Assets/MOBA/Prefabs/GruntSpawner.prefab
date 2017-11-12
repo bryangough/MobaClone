@@ -20,6 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4092761486940832}
   - component: {fileID: 212004407717636508}
+  - component: {fileID: 114704300894188752}
+  - component: {fileID: 114824772781729422}
+  - component: {fileID: 114198673629214248}
+  - component: {fileID: 114254186007720218}
   m_Layer: 0
   m_Name: GruntSpawner
   m_TagString: Untagged
@@ -34,12 +38,85 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1732738617928976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.76, y: 1.9, z: 0}
+  m_LocalPosition: {x: -5.7, y: 0.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114198673629214248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732738617928976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d942c3f1a2df4714bc1c24abc80892d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  healthBarGameObject: {fileID: 0}
+  healthBar: {fileID: 0}
+  destroyOnDeath: 0
+--- !u!114 &114254186007720218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732738617928976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76560a3a9c72e499ba835b41b94b06a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  combatHandler: {fileID: 0}
+--- !u!114 &114704300894188752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732738617928976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 129
+    i1: 55
+    i2: 53
+    i3: 110
+    i4: 207
+    i5: 21
+    i6: 164
+    i7: 55
+    i8: 121
+    i9: 92
+    i10: 207
+    i11: 76
+    i12: 68
+    i13: 167
+    i14: 243
+    i15: 19
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114824772781729422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732738617928976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d8c398b23c0417699c68109f868454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+  path: {fileID: 0}
 --- !u!212 &212004407717636508
 SpriteRenderer:
   m_ObjectHideFlags: 1

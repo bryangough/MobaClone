@@ -91,7 +91,10 @@ public class PlayerInputHandler : NetworkBehaviour
 					}
 				}
 			}
-
+			if( touched==null )
+			{
+				return;
+			}
 			if(touched.tag == "Ground")
 			{
 

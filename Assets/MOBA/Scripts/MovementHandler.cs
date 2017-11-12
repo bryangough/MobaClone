@@ -29,7 +29,7 @@ public class MovementHandler : NetworkBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if( !isServer )
+		if( !isServer && !isLocalPlayer )
 			return;
 		doUpdate();
 	}

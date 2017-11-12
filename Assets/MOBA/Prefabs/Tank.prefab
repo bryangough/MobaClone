@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 4101631851778508}
   - component: {fileID: 114258226334896088}
   - component: {fileID: 114099010461976968}
+  - component: {fileID: 114490609389347818}
   - component: {fileID: 61403372446087346}
   - component: {fileID: 212503281750620264}
   - component: {fileID: 114452986969514046}
@@ -215,7 +216,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
+  myTeamLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  otherTeamLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   isActive: 1
+  controlTurret: 0
 --- !u!114 &114099010461976968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
   m_SendInterval: 0.09090909
-  m_SyncRotationAxis: 5
+  m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
@@ -341,6 +349,25 @@ MonoBehaviour:
   healthBarGameObject: {fileID: 0}
   healthBar: {fileID: 0}
   destroyOnDeath: 0
+--- !u!114 &114490609389347818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1589176428259484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4408210768065142}
+  m_ChildIndex: 0
+  m_SendInterval: 0.5
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
 --- !u!114 &114520576890642348
 MonoBehaviour:
   m_ObjectHideFlags: 1

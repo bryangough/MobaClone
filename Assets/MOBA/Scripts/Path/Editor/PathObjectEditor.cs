@@ -42,7 +42,7 @@ public class PathObjectEditor : Editor {
 
 	public override void OnInspectorGUI ()
 	{
-		DrawDefaultInspector();
+		
 		var pasfd = EditorGUILayout.ObjectField("PathPoint prefab", path.pathPrefab, typeof(PathPoint));
 		path.pathPrefab = pasfd as GameObject;
 
@@ -60,6 +60,7 @@ public class PathObjectEditor : Editor {
 		{
 			path.refreshPoints();
 		}
+		DrawDefaultInspector();
 	}
 	public void OnSceneGUI () {
 		if(path.pathPoints==null)

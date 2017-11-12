@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CombatHandler : MonoBehaviour 
+public class CombatHandler : NetworkBehaviour 
 {
 	public Team team;
 	public LayerMask myTeamLayerMask;
@@ -12,6 +13,8 @@ public class CombatHandler : MonoBehaviour
 	public delegate void TargetChanged();
     public event TargetChanged targetChanged;
 	public bool isActive = true;
+
+	public bool controlTurret = false;
 	// Use this for initialization
 	[SerializeField]
 	public TargetableObject target
@@ -51,6 +54,7 @@ public class CombatHandler : MonoBehaviour
 			otherTeamLayerMask = LayerMask.GetMask("RightSide", "LeftSide");
 			this.gameObject.layer = LayerMask.NameToLayer("Neutral");
 		}
+		controlTurret = isServer || isLocalPlayer;
 		//this.gameObject.layer = 1 << myTeamLayerMask.value;
 	}
 

@@ -24,28 +24,31 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
 
   public void TakeDamage(int amount)
   {
-    currentHealth -= amount;
-    if (currentHealth <= 0)
-    {
-      if (destroyOnDeath)
+      currentHealth -= amount;
+      if (currentHealth <= 0)
       {
-        Destroy(gameObject);
+          if (destroyOnDeath)
+          {
+              Destroy(gameObject);
+          }
+          else
+          {
+              currentHealth = maxHealth;
+              // called on the Server, will be invoked on the Clients
+              RpcRespawn();
+          }
       }
-      else
-      {
-        currentHealth = maxHealth;
-
-        // called on the Server, will be invoked on the Clients
-        RpcRespawn();
-      }
-    }
 
     //healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
   }
 
   void OnChangeHealth(int health)
   {
-    //healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+      //healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+      if( healthChange!= null )
+      {
+        healthChange();
+      }
   }
 
   [ClientRpc]
@@ -53,8 +56,9 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
   {
     if (isLocalPlayer)
     {
-      // move back to zero location
-      transform.position = Vector3.zero;
+        //return to spawn, start repawn timer
+        // move back to zero location
+        //transform.position = Vector3.zero;
     }
   }
 }

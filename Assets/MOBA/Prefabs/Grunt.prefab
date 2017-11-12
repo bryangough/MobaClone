@@ -186,7 +186,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isActive: 1
-  target: {fileID: 0}
 --- !u!114 &114678088181246668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1092ff873c0a9426690b7532bb99e9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRange: 2
+  targetRange: 3
   movementHandler: {fileID: 0}
   isBusy: 0
   delayCounter: 0

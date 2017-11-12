@@ -22,7 +22,10 @@ public class TurretHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if( !combatHandler.controlTurret )
+		{
+			return;
+		}
 		//center
 		if( combatHandler.target == null)
 		{
