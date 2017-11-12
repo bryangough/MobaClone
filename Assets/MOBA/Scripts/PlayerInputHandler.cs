@@ -24,7 +24,10 @@ public class PlayerInputHandler : NetworkBehaviour
 	}
 	public override void OnStartLocalPlayer()
 	{
-		
+		//move this to OnServerAddPlayer
+		 MyPlayer myPlayer = FindObjectOfType(typeof(MyPlayer)) as MyPlayer;
+		 myPlayer.myPlayer = this.gameObject;
+		 myPlayer.inputHandler = this;
 	}
 	// Update is called once per frame
 	void Update () 

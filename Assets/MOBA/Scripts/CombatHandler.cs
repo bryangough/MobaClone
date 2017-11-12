@@ -10,7 +10,7 @@ public class CombatHandler : MonoBehaviour
 	TargetableObject _targetedObject;
 
 	public delegate void TargetChanged();
-    public static event TargetChanged targetChanged;
+    public event TargetChanged targetChanged;
 	public bool isActive = true;
 	// Use this for initialization
 	[SerializeField]
@@ -20,10 +20,14 @@ public class CombatHandler : MonoBehaviour
 			return _targetedObject; 
 		}
 		set { 
-			_targetedObject = value;
-			if( targetChanged != null)
-				targetChanged();
-			//dispatch event - new target!
+			if( _targetedObject != value )
+			{
+				_targetedObject = value;
+				if( targetChanged != null)
+				{
+					targetChanged();
+				}
+			}
 		}
 	}
 	//public TargetableObject target;

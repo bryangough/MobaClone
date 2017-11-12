@@ -21,10 +21,15 @@ public class AiController : NetworkBehaviour {
 			return;
 		}
 		combatHandler = this.GetComponent<CombatHandler>();
+		combatHandler.targetChanged += targetChanged;
 		targetFinder = this.GetComponent<TargetFinder>();
 		movementHandler = this.GetComponent<MovementHandler>();
+		
 	}
-	
+	void targetChanged()
+	{
+		delayCounter = checkDelay;
+	}
 	// Update is called once per frame
 	void Update () 
 	{
