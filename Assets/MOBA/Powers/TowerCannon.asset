@@ -11,17 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5c84527dc0c4879ba2197cb62af296, type: 3}
   m_Name: TowerCannon
   m_EditorClassIdentifier: 
-  weaponname: gun
-  animationType: gun
-  buttonImg: {fileID: 0}
-  AIPower: 1
-  dmg: 10
-  acc: 1
-  range: 40
-  type: 
-  cost: 4
-  bullet: {fileID: 0}
-  attackType: 
-  cooldown: 0
-  onCooldown: 0
+  weaponname: Turret Gun
   description: 
+  range: 40
+  cost: 4
+  scaling: 0
+  cooldown: 0
+  castTime: 0
+  isChannel: 0
+  requiresTarget: 0
+  alwaysTargetSelf: 0
+  isToggle: 0
+  dmg: 10
+  damageType: 0
+  buttonImg: {fileID: 0}
+  bullet: {fileID: 0}

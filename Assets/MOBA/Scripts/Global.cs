@@ -1,10 +1,13 @@
+//
+
 //This is for dividing the teams
 //The display will have friends as blue and enemies as red
-
 public enum Team
 {
     Left,
-    Right
+    Right,
+    Neutral,
+    None
 }
 
 public enum MOVEMENT_STATE
@@ -26,6 +29,11 @@ public enum POWER_TYPE
 {   
     offensive,
     support
+}
+
+public enum Damage_TYPE
+{
+    PHYSICAL
 }
 public struct Power
 {

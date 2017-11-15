@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Name: SimpleGun
   m_EditorClassIdentifier: 
   weaponname: gun
-  animationType: gun
-  buttonImg: {fileID: 0}
-  AIPower: 1
-  dmg: 2
-  acc: 1
-  range: 40
-  clipsize: 6
-  type: 
-  cost: 4
-  bullet: {fileID: 1338852124406488, guid: ca5869a38cc4143b384b1c4bb78b102c, type: 2}
-  attackType: 
-  cooldown: 0
   description: 
+  range: 5
+  cost: 0
+  scaling: 0
+  cooldown: 5
+  castTime: 0
+  isChannel: 0
+  requiresTarget: 1
+  alwaysTargetSelf: 0
+  isToggle: 0
+  dmg: 5
+  damageType: 0
+  buttonImg: {fileID: 0}
+  bullet: {fileID: 1338852124406488, guid: ca5869a38cc4143b384b1c4bb78b102c, type: 2}

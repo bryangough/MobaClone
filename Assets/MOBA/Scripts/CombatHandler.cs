@@ -15,6 +15,7 @@ public class CombatHandler : NetworkBehaviour
 	public bool isActive = true;
 
 	public bool controlTurret = false;
+	PowerHandler powerHandler;
 	// Use this for initialization
 	[SerializeField]
 	public TargetableObject target
@@ -55,6 +56,8 @@ public class CombatHandler : NetworkBehaviour
 			this.gameObject.layer = LayerMask.NameToLayer("Neutral");
 		}
 		controlTurret = isServer || isLocalPlayer;
+
+		powerHandler = this.GetComponent<PowerHandler>();
 		//this.gameObject.layer = 1 << myTeamLayerMask.value;
 	}
 
@@ -71,31 +74,49 @@ public class CombatHandler : NetworkBehaviour
 	{
 		if( target != null )	
 		{
-			//attach target with basic shot.
+			if( target.team != team )
+			{
+				if( powerHandler.isPowerReady(0) )
+				{
+					powerHandler.usePower(0);
+				}
+				//attach target with basic shot.
+				//powerHandler.
+			}
+			
 		}
+	}
+
+	public void usePower(BasicPower power)
+	{
+		CmdUsePower(power, target.gameObject);
+	}
+	[Command]
+	void CmdUsePower(BasicPower power, GameObject target)
+	{
+		//check if power off cooldown?
+		//apply 
+
+		// Create the Bullet from the Bullet Prefab
+		/*var bullet = (GameObject)Instantiate(
+			bulletPrefab,
+			bulletSpawn.position,
+			bulletSpawn.rotation);
+
+		// Add velocity to the bullet
+		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+
+		if(isLocalPlayer)
+		bullet.GetComponent<MeshRenderer>().material.color = Color.blue;
+
+		// Spawn the bullet on the Clients
+		NetworkServer.Spawn(bullet);
+
+		// Destroy the bullet after 2 seconds
+		Destroy(bullet, 2.0f);*/
 	}
 }
 /*
 
-[Command]
-  void CmdFire()
-  {
-    // Create the Bullet from the Bullet Prefab
-    var bullet = (GameObject)Instantiate(
-        bulletPrefab,
-        bulletSpawn.position,
-        bulletSpawn.rotation);
 
-    // Add velocity to the bullet
-    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
-
-    if(isLocalPlayer)
-      bullet.GetComponent<MeshRenderer>().material.color = Color.blue;
-
-    // Spawn the bullet on the Clients
-    NetworkServer.Spawn(bullet);
-
-    // Destroy the bullet after 2 seconds
-    Destroy(bullet, 2.0f);
-  }
    */

@@ -13,7 +13,16 @@ public class TargetableObject : MonoBehaviour
 		health = this.gameObject.GetComponent<Health>();
         combatHandler = this.gameObject.GetComponent<CombatHandler>();
 	}
-
+    public Team team
+	{
+		get 
+        { 
+            if(combatHandler!=null)
+			    return combatHandler.team;
+            else
+                return Team.None; 
+		}
+	}
     public bool isAlive()
     {
         return combatHandler.isActive;

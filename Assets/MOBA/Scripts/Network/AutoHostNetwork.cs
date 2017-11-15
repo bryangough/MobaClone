@@ -13,9 +13,11 @@ public class AutoHostNetwork : MonoBehaviour {
  
 	void Start () 
 	{
+		#if UNITY_EDITOR
 		if(autoStartHost)
 		{
 			manager.StartHost();
 		}
+		#endif
 	}
 }
