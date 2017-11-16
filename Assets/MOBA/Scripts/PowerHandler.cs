@@ -6,15 +6,19 @@ using UnityEngine;
 //this should only be active either on the server or on the player
 public class PowerHandler : MonoBehaviour {
 
-	public BasicPower[] powers;
-
+	public BasicPower[] powerData;
+	public UserPower[] powers;
+	public float cooldown;
 	//public 
 	// Use this for initialization
 	void Start () {
 		CombatHandler combatHandler = this.GetComponent<CombatHandler>();
-		for( int x=0;x<powers.Length;x++)
+		powers = new UserPower[powerData.Length];
+		for( int x=0;x<powerData.Length;x++)
 		{
-			powers[x].initialize(combatHandler);
+			UserPower userPower = new UserPower();
+			userPower.initialize(combatHandler, powerData[x]);
+			powers[x] = userPower;
 		}
 	}
 	
@@ -24,6 +28,10 @@ public class PowerHandler : MonoBehaviour {
 		for( int x=0;x<powers.Length;x++)
 		{
 			powers[x].updateCooldown(Time.deltaTime);
+		}
+		if(powers.Length>0)
+		{
+			cooldown = powers[0].coolDownCounter;
 		}
 	}
 	public bool isPowerReady(int id)
@@ -44,5 +52,14 @@ public class PowerHandler : MonoBehaviour {
 		//if power exists
 		//if power off-cooldown
 		return powers[id].usePower();
+	}
+
+	public BasicPower getPower(int id)
+	{
+		if( id >= powers.Length)
+		{
+			return null;
+		}
+		return powers[id].power;
 	}
 }

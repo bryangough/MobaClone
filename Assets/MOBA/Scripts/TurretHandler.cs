@@ -13,6 +13,7 @@ public class TurretHandler : MonoBehaviour {
 		
 		parent = this.gameObject.transform.parent;
 		combatHandler = this.GetComponentInParent<CombatHandler>();
+		combatHandler.turretHandler = this;
 		animator = this.GetComponent<Animator>();
 	}
 	public void fireCannon()

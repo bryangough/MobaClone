@@ -4,6 +4,7 @@ using UnityEditor;
 
 public class MakePower 
 {
+  
     [MenuItem("Assets/Create/Power Object")]
     public static void Create()
     {

@@ -43,35 +43,5 @@ public class BasicPower : ScriptableObject
 
 
 	//Game variables
-	public float coolDownCounter = 0;
-	public bool onCooldown = false;
-	public CombatHandler combatHandler;
-	public void initialize (CombatHandler combatHandler)
-	{
-		this.combatHandler = combatHandler;
-	}
-    public bool usePower()
-	{
-		if( this.isReady() )
-		{
-			coolDownCounter = cooldown;
-			onCooldown = true;
-			this.combatHandler.usePower(this);
-		}
-		return false;
-	}
-	public bool isReady()
-	{
-		return !onCooldown;
-	}
-	//clean this up
-	public void updateCooldown(float timeDelta)
-	{
-		if(onCooldown)
-		{
-			coolDownCounter -= timeDelta;
-			if(coolDownCounter<0)
-				onCooldown = false;
-		}
-	}
+	
 }

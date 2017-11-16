@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerStartPosition : MonoBehaviour {
 
+
 	public Team team;
 	// Use this for initialization
 	void Start () {

@@ -13,6 +13,7 @@ public class CombatHandler : NetworkBehaviour
 	public delegate void TargetChanged();
     public event TargetChanged targetChanged;
 	public bool isActive = true;
+	public TurretHandler turretHandler;
 
 	public bool controlTurret = false;
 	PowerHandler powerHandler;
@@ -78,7 +79,8 @@ public class CombatHandler : NetworkBehaviour
 			{
 				if( powerHandler.isPowerReady(0) )
 				{
-					powerHandler.usePower(0);
+					//powerHandler.usePower(0);
+					CmdUsePower(0, target.gameObject);
 				}
 				//attach target with basic shot.
 				//powerHandler.
@@ -86,14 +88,35 @@ public class CombatHandler : NetworkBehaviour
 			
 		}
 	}
-
-	public void usePower(BasicPower power)
-	{
-		CmdUsePower(power, target.gameObject);
-	}
 	[Command]
-	void CmdUsePower(BasicPower power, GameObject target)
+	void CmdUsePower(int powerId, GameObject targetGameObject)
 	{
+		BasicPower power = powerHandler.getPower(powerId);
+		//target
+		bool usedPower = true;
+		if( power!=null	)
+		{
+			TargetableObject target = null;
+			if( targetGameObject!=null)
+			{
+				
+				target = targetGameObject.GetComponent<TargetableObject>();
+				if( target != null )
+				{
+					if( target.isAlive() )
+					{
+						target.health.takeDamage(power.dmg);
+						usedPower = true;
+					}
+				}
+			}
+			if(usedPower)
+			{
+				powerHandler.usePower(powerId);
+				RpcUsePower(powerId);
+			}
+			//takeDamage
+		}
 		//check if power off cooldown?
 		//apply 
 
@@ -114,6 +137,22 @@ public class CombatHandler : NetworkBehaviour
 
 		// Destroy the bullet after 2 seconds
 		Destroy(bullet, 2.0f);*/
+	}
+	//these only happen on users. Not on server.
+	[ClientRpc]
+	void RpcUsePower(int powerId)
+	{
+		if (isLocalPlayer)
+		{
+			powerHandler.usePower(powerId);
+			//return to spawn, start repawn timer
+			// move back to zero location
+			//transform.position = Vector3.zero;
+		}
+		if(turretHandler!=null)
+		{
+			turretHandler.fireCannon();
+		}
 	}
 }
 /*

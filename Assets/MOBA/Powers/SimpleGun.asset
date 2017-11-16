@@ -16,12 +16,13 @@ MonoBehaviour:
   range: 5
   cost: 0
   scaling: 0
-  cooldown: 5
+  cooldown: 3
   castTime: 0
   isChannel: 0
   requiresTarget: 1
   alwaysTargetSelf: 0
   isToggle: 0
+  isInstant: 0
   dmg: 5
   damageType: 0
   buttonImg: {fileID: 0}

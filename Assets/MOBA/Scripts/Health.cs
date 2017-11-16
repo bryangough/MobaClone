@@ -6,10 +6,10 @@ using UnityEngine.Networking;
 public class Health : NetworkBehaviour { //MonoBehaviour {
   public delegate void HealthChanged();
   public event HealthChanged healthChange;
-  public const int maxHealth = 100;
+  public int maxHealth = 100;
 
   [SyncVar(hook = "OnChangeHealth")]
-  public int currentHealth = maxHealth;
+  public int currentHealth;
 
 //Healthbar should be object pooled
   public GameObject healthBarGameObject;
@@ -19,10 +19,12 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
 
   public override void OnStartClient()
   {
-    //healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+    currentHealth = maxHealth;
+    if(healthBar!=null)
+      healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
   }
 
-  public void TakeDamage(int amount)
+  public void takeDamage(int amount)
   {
       currentHealth -= amount;
       if (currentHealth <= 0)
@@ -30,6 +32,7 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
           if (destroyOnDeath)
           {
               Destroy(gameObject);
+              currentHealth = 0;
           }
           else
           {
@@ -38,13 +41,15 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
               RpcRespawn();
           }
       }
-
-    //healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+    if(healthBar!=null)
+      healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
   }
 
   void OnChangeHealth(int health)
   {
-      //healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+    Debug.Log(health);
+      if(healthBar!=null)
+        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
       if( healthChange!= null )
       {
         healthChange();
