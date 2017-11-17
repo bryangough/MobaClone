@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 114520576890642348}
   - component: {fileID: 114315672100043680}
   - component: {fileID: 50553502800279694}
+  - component: {fileID: 114364314566752864}
   m_Layer: 9
   m_Name: Tank
   m_TagString: Untagged
@@ -107,7 +108,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1589176428259484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.44741893, y: 0.67403316, z: 0}
+  m_LocalPosition: {x: 1.2877104, y: -1.2322983, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4408210768065142}
@@ -224,6 +225,7 @@ MonoBehaviour:
     m_Bits: 0
   isActive: 1
   turretHandler: {fileID: 0}
+  firePoint: {fileID: 1092713801382068}
   controlTurret: 0
 --- !u!114 &114099010461976968
 MonoBehaviour:
@@ -335,6 +337,17 @@ MonoBehaviour:
   altPressed: 0
   ctrlPressed: 0
   shiftPressed: 0
+--- !u!114 &114364314566752864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1589176428259484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e852890d99645c495ce8341962bd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114452986969514046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -383,6 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerData:
   - {fileID: 11400000, guid: 1c60b1dae2ae34f6198158d38f78639e, type: 2}
+  - {fileID: 11400000, guid: 2b27a91e2ac07492fbe42170d4fe8456, type: 2}
   powers: []
   cooldown: 0
 --- !u!212 &212329666742402144

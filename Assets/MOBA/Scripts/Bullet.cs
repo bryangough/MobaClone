@@ -1,9 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class Bullet : MonoBehaviour {
-
-  void OnCollisionEnter(Collision collision)
+using UnityEngine.Networking;
+public class Bullet : NetworkBehaviour 
+{
+  BasicPower payload;
+  TargetableObject target;
+  public void initialize(BasicPower payload, TargetableObject target)
+  {
+    this.payload = payload;
+    this.target = target;
+  }
+  public void deliverPayload()
+  { 
+    if( isServer )
+    {
+      target.health.takeDamage(payload.dmg);
+    }
+    Destroy(gameObject);
+  }
+ /* void OnCollisionEnter(Collision collision)
   {
     var hit = collision.gameObject;
     var health = hit.GetComponent<Health>();
@@ -13,5 +28,5 @@ public class Bullet : MonoBehaviour {
     }
 
     Destroy(gameObject);
-  }
+  }*/
 }

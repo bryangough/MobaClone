@@ -9,22 +9,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a5c84527dc0c4879ba2197cb62af296, type: 3}
-  m_Name: SimpleCannon
+  m_Name: Large Shot
   m_EditorClassIdentifier: 
-  weaponname: gun
+  weaponname: Large Shot
   description: 
+  dmg: 40
   range: 5
   cost: 0
   scaling: 0
-  cooldown: 3
+  cooldown: 10
   castTime: 0
   isChannel: 0
   requiresTarget: 1
-  requiresLineOfSite: 0
+  requiresLineOfSite: 1
   alwaysTargetSelf: 0
   isToggle: 0
   isInstant: 0
-  dmg: 5
   damageType: 0
+  targetType: 1
   buttonImg: {fileID: 0}
   bullet: {fileID: 1338852124406488, guid: ca5869a38cc4143b384b1c4bb78b102c, type: 2}

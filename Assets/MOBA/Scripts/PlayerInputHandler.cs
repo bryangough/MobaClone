@@ -45,6 +45,7 @@ public class PlayerInputHandler : NetworkBehaviour
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
 			Debug.Log("Q");
+			combatHandler.usePower(1);
 		}
 		if (Input.GetKeyDown(KeyCode.W))
 		{

@@ -9,21 +9,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a5c84527dc0c4879ba2197cb62af296, type: 3}
-  m_Name: TowerCannon
+  m_Name: GruntGun
   m_EditorClassIdentifier: 
-  weaponname: Turret Gun
+  weaponname: gun
   description: 
-  range: 40
-  cost: 4
+  dmg: 2
+  range: 2
+  cost: 0
   scaling: 0
-  cooldown: 20
+  cooldown: 3
   castTime: 0
   isChannel: 0
-  requiresTarget: 0
+  requiresTarget: 1
+  requiresLineOfSite: 1
   alwaysTargetSelf: 0
   isToggle: 0
   isInstant: 0
-  dmg: 10
   damageType: 0
+  targetType: 1
   buttonImg: {fileID: 0}
   bullet: {fileID: 0}

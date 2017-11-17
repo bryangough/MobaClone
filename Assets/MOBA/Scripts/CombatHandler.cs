@@ -14,6 +14,7 @@ public class CombatHandler : NetworkBehaviour
     public event TargetChanged targetChanged;
 	public bool isActive = true;
 	public TurretHandler turretHandler;
+	public GameObject firePoint;
 
 	public bool controlTurret = false;
 	PowerHandler powerHandler;
@@ -72,30 +73,76 @@ public class CombatHandler : NetworkBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if( target != null )	
+		//this shouldn't happen every frame
+		//usePower(0);
+	}
+	//should maybe change this to not be so many ifs
+	public void displayError(string errorMessage)
+	{
+		Debug.Log(this.name + " had error: " + errorMessage);
+	}
+	public bool usePower(int powerId)
+	{
+		BasicPower power = powerHandler.getPower(powerId);
+		if( power == null)
 		{
-			if( target.team != team )
+			displayError("Power not found.");
+			return false;
+		}
+		
+		if( !powerHandler.isPowerReady(powerId) )
+		{
+			displayError("Power not ready.");
+			return false;
+		}
+		
+		if( power.requiresTarget && target == null )	
+		{
+			displayError("Power requires target.");
+			return false;
+		}
+		
+		if( !power.alwaysTargetSelf )
+		{
+			
+			if( power.targetType == TARGET_TYPE.OTHERTEAM && target.team == team )
 			{
-				if( powerHandler.isPowerReady(0) )
-				{
-					BasicPower power = powerHandler.getPower(0);
-					if(	testDistanceToTarget(power.range) && testLineOfSightEnemy() )
-					{
-						CmdUsePower(0, target.gameObject);
-					}
-					//powerHandler.usePower(0);
-				}
-				//attach target with basic shot.
-				//powerHandler.
+				displayError("Power target not other team.");
+				return false;
+			}		
+			else if( power.targetType == TARGET_TYPE.MYTEAM && target.team != team )
+			{
+				displayError("Power target MY team.");
+				return false;
 			}
 			
+			if(	!testDistanceToTarget(power.range) )
+			{
+				displayError("Power target not in range.");
+				return false;
+			}
+			
+			if(	power.requiresLineOfSite && !testLineOfSightEnemy() )
+			{
+				displayError("Can't see target.");
+				return false;
+			}
+			
+			CmdUsePower(powerId, target.gameObject);
+		}	
+		else
+		{
+			CmdUsePower(powerId, this.gameObject);
 		}
+		
+		return true;
 	}
 	// Checks
 	public bool testDistanceToTarget(float targetRange)
 	{
 		Vector3 offset = target.transform.position - transform.position;
 		float sqrLen = offset.sqrMagnitude;
+		
 		if( sqrLen < targetRange * targetRange)
 		{
 			return true;
@@ -112,7 +159,7 @@ public class CombatHandler : NetworkBehaviour
 	}
 	public bool testLineOfSight(LayerMask layerMask)
 	{
-		RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, target.transform.position, layerMask.value);
+		RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, target.transform.position, otherTeamLayerMask.value);
 		for( int x=0;x<hits.Length;x++)
 		{
 			if (hits[x].transform == target.transform)
@@ -127,6 +174,7 @@ public class CombatHandler : NetworkBehaviour
 	void CmdUsePower(int powerId, GameObject targetGameObject)
 	{
 		BasicPower power = powerHandler.getPower(powerId);
+		Debug.Log(this.name + " use power: " + power.weaponname);
 		//target
 		bool usedPower = true;
 		if( power!=null	)
@@ -144,8 +192,31 @@ public class CombatHandler : NetworkBehaviour
 						//if(	testDistanceToTarget(power.range) && testLineOfSightEnemy() )
 						//{
 							//check within range?
-							target.health.takeDamage(power.dmg);
-							usedPower = true;
+							//even for instant, should I make it an object that is applied next frame?
+							if(power.isInstant)
+							{
+								target.health.takeDamage(power.dmg);
+								usedPower = true;
+							}
+							else
+							{
+								var bullet = (GameObject)Instantiate(
+									power.bullet,
+									firePoint.transform.position,
+									firePoint.transform.rotation);
+
+								MovementHandler movementHandler = bullet.GetComponent<MovementHandler>();
+								Bullet bulletHandler = bullet.GetComponent<Bullet>();
+								bulletHandler.initialize( Object.Instantiate(power) as BasicPower, target );
+								
+								if( movementHandler!= null )
+								{
+									movementHandler.moveToTarget(target.transform, bulletHandler.deliverPayload);
+									NetworkServer.Spawn(bullet);
+								}								
+								//if(!isLocalPlayer)
+								//bullet.GetComponent<MeshRenderer>().material.color = Color.blue;
+							}
 						//}
 						
 					}
@@ -179,10 +250,11 @@ public class CombatHandler : NetworkBehaviour
 		// Destroy the bullet after 2 seconds
 		Destroy(bullet, 2.0f);*/
 	}
-	//these only happen on users. Not on server.
+	//these only happen on users and server.
 	[ClientRpc]
 	void RpcUsePower(int powerId)
 	{
+		Debug.Log("RpcUsePower "+isServer);
 		if (isLocalPlayer)
 		{
 			powerHandler.usePower(powerId);
