@@ -9,6 +9,12 @@ public enum Team
     Neutral,
     None
 }
+public enum TARGET_TYPE
+{
+    MYTEAM,
+    OTHERTEAM,
+    BOTH
+}
 
 public enum MOVEMENT_STATE
 {
@@ -34,8 +40,4 @@ public enum POWER_TYPE
 public enum Damage_TYPE
 {
     PHYSICAL
-}
-public struct Power
-{
-    
 }

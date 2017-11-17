@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a5c84527dc0c4879ba2197cb62af296, type: 3}
-  m_Name: SimpleGun
+  m_Name: SimpleCannon
   m_EditorClassIdentifier: 
   weaponname: gun
   description: 
@@ -20,6 +20,7 @@ MonoBehaviour:
   castTime: 0
   isChannel: 0
   requiresTarget: 1
+  requiresLineOfSite: 0
   alwaysTargetSelf: 0
   isToggle: 0
   isInstant: 0

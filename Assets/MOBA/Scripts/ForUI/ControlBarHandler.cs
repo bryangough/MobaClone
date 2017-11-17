@@ -27,9 +27,9 @@ public class ControlBarHandler : MonoBehaviour {
 		powers = myPlayer.myPlayer.GetComponent<PowerHandler>();
 		playerInput = myPlayer.myPlayer.GetComponent<PlayerInputHandler>();
 	}
-	void updateBar()
+	void updateBar(int newHealth)
 	{
-		healthBar.setPercent(health.currentHealth, health.maxHealth);
+		healthBar.setPercent(newHealth, health.maxHealth);
 	}
 	// Update is called once per frame
 	void Update () {

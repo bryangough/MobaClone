@@ -40,14 +40,13 @@ public class CombatHandler : NetworkBehaviour
 		if(team == Team.Right)
 		{
 			myTeamLayerMask = LayerMask.GetMask("RightSide");
-			otherTeamLayerMask = LayerMask.GetMask("LeftSide");
-			this.gameObject.layer = LayerMask.NameToLayer("RightSide");
-			
+			otherTeamLayerMask = LayerMask.GetMask("LeftSide", "Neutral");
+			this.gameObject.layer = LayerMask.NameToLayer("RightSide");	
 		}
 		else if(team == Team.Left)
 		{
 			myTeamLayerMask = LayerMask.GetMask("LeftSide");
-			otherTeamLayerMask = LayerMask.GetMask("RightSide");
+			otherTeamLayerMask = LayerMask.GetMask("RightSide", "Neutral");
 			this.gameObject.layer = LayerMask.NameToLayer("LeftSide");
 		}
 		else//Neutral enenimes
@@ -79,8 +78,12 @@ public class CombatHandler : NetworkBehaviour
 			{
 				if( powerHandler.isPowerReady(0) )
 				{
+					BasicPower power = powerHandler.getPower(0);
+					if(	testDistanceToTarget(power.range) && testLineOfSightEnemy() )
+					{
+						CmdUsePower(0, target.gameObject);
+					}
 					//powerHandler.usePower(0);
-					CmdUsePower(0, target.gameObject);
 				}
 				//attach target with basic shot.
 				//powerHandler.
@@ -88,6 +91,38 @@ public class CombatHandler : NetworkBehaviour
 			
 		}
 	}
+	// Checks
+	public bool testDistanceToTarget(float targetRange)
+	{
+		Vector3 offset = target.transform.position - transform.position;
+		float sqrLen = offset.sqrMagnitude;
+		if( sqrLen < targetRange * targetRange)
+		{
+			return true;
+		}
+		return false;
+	}
+	public bool testLineOfSightFriend()
+	{
+		return testLineOfSight(myTeamLayerMask);
+	}
+	public bool testLineOfSightEnemy()
+	{
+		return testLineOfSight(otherTeamLayerMask);
+	}
+	public bool testLineOfSight(LayerMask layerMask)
+	{
+		RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, target.transform.position, layerMask.value);
+		for( int x=0;x<hits.Length;x++)
+		{
+			if (hits[x].transform == target.transform)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	[Command]
 	void CmdUsePower(int powerId, GameObject targetGameObject)
 	{
@@ -99,14 +134,20 @@ public class CombatHandler : NetworkBehaviour
 			TargetableObject target = null;
 			if( targetGameObject!=null)
 			{
-				
 				target = targetGameObject.GetComponent<TargetableObject>();
 				if( target != null )
 				{
 					if( target.isAlive() )
 					{
-						target.health.takeDamage(power.dmg);
-						usedPower = true;
+						//May need to account for lag here.
+						//Test vs location on timestamp. For now leave it.
+						//if(	testDistanceToTarget(power.range) && testLineOfSightEnemy() )
+						//{
+							//check within range?
+							target.health.takeDamage(power.dmg);
+							usedPower = true;
+						//}
+						
 					}
 				}
 			}

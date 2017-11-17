@@ -61,24 +61,12 @@ public class AiController : NetworkBehaviour {
 			}
 			if( !isBusy )
 			{
-				Transform other  = combatHandler.target.transform;
-				Vector3 offset = other.position - transform.position;
-            	float sqrLen = offset.sqrMagnitude;
-				if( sqrLen < targetRange * targetRange)
-				{
-					RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, other.position, combatHandler.otherTeamLayerMask.value);
 
-					//RaycastHit2D[] hits = Physics2D.RaycastAll (Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero);
-					//Debug.Log(transform.position+" "+other.position);
-					bool hitObject = false;
-					for( int x=0;x<hits.Length;x++)
-					{
-						if (hits[x].transform == other)
-						{
-							hitObject = true;
-						}
-					}
-					if (hitObject)
+				bool inRange = combatHandler.testDistanceToTarget(targetRange);
+				if( inRange )
+				{
+					bool hasLineOfSite = combatHandler.testLineOfSightEnemy();
+					if (hasLineOfSite)
 					{
 						 //RaycastHit2D
 						 // attack target

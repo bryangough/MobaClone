@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 //using System.Collections;
 
 public class Health : NetworkBehaviour { //MonoBehaviour {
-  public delegate void HealthChanged();
+  public delegate void HealthChanged(int health);
   public event HealthChanged healthChange;
   public int maxHealth = 100;
 
@@ -13,7 +13,7 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
 
 //Healthbar should be object pooled
   public GameObject healthBarGameObject;
-  public RectTransform healthBar;
+  public BarControl healthBar;
 
   public bool destroyOnDeath;
 
@@ -21,11 +21,12 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
   {
     currentHealth = maxHealth;
     if(healthBar!=null)
-      healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+      healthBar.setPercent(currentHealth, maxHealth);
   }
 
   public void takeDamage(int amount)
   {
+    //isServer?
       currentHealth -= amount;
       if (currentHealth <= 0)
       {
@@ -41,18 +42,15 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
               RpcRespawn();
           }
       }
-    if(healthBar!=null)
-      healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
   }
 
   void OnChangeHealth(int health)
   {
-    Debug.Log(health);
       if(healthBar!=null)
-        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+        healthBar.setPercent(health, maxHealth);
       if( healthChange!= null )
       {
-        healthChange();
+        healthChange(health);
       }
   }
 

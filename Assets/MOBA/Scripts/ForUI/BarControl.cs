@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BarControl : MonoBehaviour {
 
 	public RectTransform bar;
-	public float barPercent;
+	public float barPercent  = 1.0f;
 	public float width;
 	public Text displayText;
 	// Use this for initialization
@@ -20,8 +20,12 @@ public class BarControl : MonoBehaviour {
 		{
 			barPercent = 0;
 		}
-		barPercent = num/total;
-		displayText.text = num +"/"+total;
+		else
+		{
+			barPercent = num/total;
+		}
+		if( displayText !=null )
+			displayText.text = num +"/"+total;
 		updateBar();
 	}
 	public void updateBar()

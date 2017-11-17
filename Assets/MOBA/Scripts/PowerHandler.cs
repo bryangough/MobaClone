@@ -21,6 +21,11 @@ public class PowerHandler : MonoBehaviour {
 			powers[x] = userPower;
 		}
 	}
+	bool testRange(BasicPower power)
+	{
+
+		return false;
+	}
 	
 	// Update is called once per frame
 	void Update () {

@@ -10,8 +10,8 @@ public class BasicPower : ScriptableObject
 	public string weaponname = "gun";
 	public string description = "";
 
-
 	//
+	public int dmg  = 2;
 	public int range = 5;
 	public int cost = 4;
 	public int scaling = 0;//?	
@@ -20,14 +20,15 @@ public class BasicPower : ScriptableObject
 	public bool isChannel = false;
 
 	//
-	public bool requiresTarget = false;
+	public bool requiresTarget = true;
+	public bool requiresLineOfSite = true;
 	public bool alwaysTargetSelf = false;
 	public bool isToggle = false;
 	public bool isInstant = false;
 	//
-	public int dmg  = 2;
+	
 	public Damage_TYPE damageType = Damage_TYPE.PHYSICAL;
-
+	public TARGET_TYPE targetType = TARGET_TYPE.OTHERTEAM;
 
 
 	//ui 
