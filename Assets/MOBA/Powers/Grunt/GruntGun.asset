@@ -11,13 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5c84527dc0c4879ba2197cb62af296, type: 3}
   m_Name: GruntGun
   m_EditorClassIdentifier: 
-  weaponname: gun
+  weaponname: Grunt Gun
   description: 
   dmg: 2
-  range: 2
+  range: 3
   cost: 0
   scaling: 0
-  cooldown: 3
+  cooldown: 5
   castTime: 0
   isChannel: 0
   requiresTarget: 1
@@ -29,3 +29,4 @@ MonoBehaviour:
   targetType: 1
   buttonImg: {fileID: 0}
   bullet: {fileID: 0}
+  explosion: {fileID: 0}

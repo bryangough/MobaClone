@@ -24,6 +24,7 @@ public class BarControl : MonoBehaviour {
 		{
 			barPercent = num/total;
 		}
+		Debug.Log(barPercent);
 		if( displayText !=null )
 			displayText.text = num +"/"+total;
 		updateBar();

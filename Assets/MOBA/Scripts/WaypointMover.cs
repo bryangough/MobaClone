@@ -12,6 +12,8 @@ public class WaypointMover : MovementHandler {
 	void Start () {
 		if( !isServer )
 			return;
+		if( path == null)
+			return;
 		nextPoint = path.getFirstPoint();
 		if( nextPoint!=null )
 		{

@@ -39,6 +39,7 @@ public class BasicPower : ScriptableObject
 
 	//?
 	public GameObject bullet;
+	public GameObject explosion;
 
 
 
