@@ -81,32 +81,39 @@ public class CombatHandler : NetworkBehaviour
 		//this shouldn't happen every frame
 		if( target != null && powerHandler.isPowerReady(0) )	
 		{
-			usePower(0);
+			usePower(0, true);
 		}
 	}
 	//should maybe change this to not be so many ifs
-	public void displayError(string errorMessage)
+	public void displayError(string errorMessage, bool surpressError)
 	{
-		Debug.Log(this.name + " had error: " + errorMessage);
+		if(!surpressError)
+		{
+			Debug.Log(this.name + " had error: " + errorMessage);
+		}
 	}
 	public bool usePower(int powerId)
+	{
+		return usePower(powerId, false);
+	}
+	public bool usePower(int powerId, bool surpressError)
 	{
 		BasicPower power = powerHandler.getPower(powerId);
 		if( power == null)
 		{
-			displayError("Power not found.");
+			displayError("Power not found.", surpressError);
 			return false;
 		}
 		
 		if( !powerHandler.isPowerReady(powerId) && powerId>0 )
 		{
-			displayError("Power not ready.");
+			displayError("Power not ready.", surpressError);
 			return false;
 		}
 		
 		if( power.requiresTarget && target == null )	
 		{
-			displayError("Power requires target.");
+			displayError("Power requires target.", surpressError);
 			return false;
 		}
 		
@@ -115,32 +122,32 @@ public class CombatHandler : NetworkBehaviour
 			
 			if( power.targetType == TARGET_TYPE.OTHERTEAM && target.team == team )
 			{
-				displayError("Power target not other team.");
+				displayError("Power target not other team.", surpressError);
 				return false;
 			}		
 			else if( power.targetType == TARGET_TYPE.MYTEAM && target.team != team )
 			{
-				displayError("Power target MY team.");
+				displayError("Power target MY team.", surpressError);
 				return false;
 			}
 			
 			if(	!testDistanceToTarget(power.range) )
 			{
-				displayError("Power target not in range.");
+				displayError("Power target not in range.", surpressError);
 				return false;
 			}
 			
 			if(	power.requiresLineOfSite && !testLineOfSightEnemy() )
 			{
-				displayError("Can't see target.");
+				displayError("Can't see target.", surpressError);
 				return false;
 			}
 			
-			CmdUsePower(powerId, target.gameObject);
+			CmdUsePower(powerId, target.gameObject, this.gameObject);
 		}	
 		else
 		{
-			CmdUsePower(powerId, this.gameObject);
+			CmdUsePower(powerId, this.gameObject, this.gameObject);
 		}
 		
 		return true;
@@ -179,10 +186,10 @@ public class CombatHandler : NetworkBehaviour
 	}
 
 	[Command]
-	void CmdUsePower(int powerId, GameObject targetGameObject)
+	void CmdUsePower(int powerId, GameObject targetGameObject, GameObject attacker)
 	{
 		BasicPower power = powerHandler.getPower(powerId);
-		Debug.Log(this.name + " use power: " + power.weaponname);
+		//Debug.Log(this.name + " use power: " + power.weaponname);
 		//target
 		bool usedPower = true;
 		if( power!=null	)
@@ -203,7 +210,7 @@ public class CombatHandler : NetworkBehaviour
 							//even for instant, should I make it an object that is applied next frame?
 							if(power.isInstant)
 							{
-								target.health.takeDamage(power.dmg);
+								bool defeated = target.health.takeDamage(power.dmg);
 								usedPower = true;
 							}
 							else
@@ -215,7 +222,7 @@ public class CombatHandler : NetworkBehaviour
 
 								MovementHandler movementHandler = bullet.GetComponent<MovementHandler>();
 								Bullet bulletHandler = bullet.GetComponent<Bullet>();
-								bulletHandler.initialize( Object.Instantiate(power) as BasicPower, target );
+								bulletHandler.initialize( Object.Instantiate(power) as BasicPower, target, attacker );
 								
 								if( movementHandler!= null )
 								{
@@ -258,11 +265,11 @@ public class CombatHandler : NetworkBehaviour
 		// Destroy the bullet after 2 seconds
 		Destroy(bullet, 2.0f);*/
 	}
-	//these only happen on users and server.
+	
 	[ClientRpc]
 	void RpcUsePower(int powerId)
 	{
-		Debug.Log("RpcUsePower "+isServer);
+//		Debug.Log("RpcUsePower "+isServer);
 		if (isLocalPlayer)
 		{
 			powerHandler.usePower(powerId);

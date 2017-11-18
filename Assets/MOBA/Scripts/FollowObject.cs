@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowObject : MonoBehaviour {
+public class FollowObject : MonoBehaviour, IPoolable {
 
 
 	public GameObject following;
@@ -10,6 +10,10 @@ public class FollowObject : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
+	}
+	public void reset()
+	{
+		following = null;
 	}
 	
 	// Update is called once per frame

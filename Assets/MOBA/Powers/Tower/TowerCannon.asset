@@ -13,19 +13,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponname: Turret Gun
   description: 
-  dmg: 10
+  dmg: 101
   range: 40
   cost: 4
   scaling: 0
-  cooldown: 20
+  cooldown: 5
   castTime: 0
   isChannel: 0
-  requiresTarget: 0
+  requiresTarget: 1
   requiresLineOfSite: 1
   alwaysTargetSelf: 0
   isToggle: 0
-  isInstant: 0
+  isInstant: 1
   damageType: 0
   targetType: 1
   buttonImg: {fileID: 0}
   bullet: {fileID: 0}
+  explosion: {fileID: 1374591161350776, guid: e88986a0ad20e4da086e249692b523c3, type: 2}

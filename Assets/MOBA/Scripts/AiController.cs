@@ -29,7 +29,13 @@ public class AiController : NetworkBehaviour {
 	void targetChanged()
 	{
 		delayCounter = checkDelay;
+		if( combatHandler.target==null || !combatHandler.target.isAlive())
+		{
+			combatHandler.target = null;
+			targetFinder.getNewTarget();
+		}
 	}
+	public TargetableObject target;
 	// Update is called once per frame
 	void Update () 
 	{
@@ -37,6 +43,7 @@ public class AiController : NetworkBehaviour {
 		{
 			return;
 		}
+		target = combatHandler.target;
 		delayCounter += Time.deltaTime;
 		//I'll establish a queue system so AI actions are not run every frame and can be spread out a bit
 		// For now I'll have it check every second
@@ -79,7 +86,7 @@ public class AiController : NetworkBehaviour {
 					else
 					{
 						//get new target?
-						Debug.Log("target is blocked.");
+						Debug.Log(this.name +" has target blocked. "+combatHandler.target.name );
 					}
 				}
 				else

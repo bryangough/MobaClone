@@ -5,10 +5,13 @@ public class Bullet : NetworkBehaviour
 {
   BasicPower payload;
   TargetableObject target;
-  public void initialize(BasicPower payload, TargetableObject target)
+  GameObject owner;
+  
+  public void initialize(BasicPower payload, TargetableObject target, GameObject owner)
   {
     this.payload = payload;
     this.target = target;
+    this.owner = owner;
   }
   public void deliverPayload()
   { 

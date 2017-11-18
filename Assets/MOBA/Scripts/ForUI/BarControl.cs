@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarControl : MonoBehaviour {
+public class BarControl : MonoBehaviour, IPoolable {
 
 	public RectTransform bar;
 	public float barPercent  = 1.0f;
 	public float width;
 	public Text displayText;
 	// Use this for initialization
-	void Start () {
+	void Awake () 
+	{
 		width = bar.sizeDelta.x;
+		//width = 100;
+		reset();
+	}
+	public void reset()
+	{
+		barPercent = 1.0f;
 		bar.sizeDelta = new Vector2(barPercent * width, bar.sizeDelta.y);
 	}
 	public void setPercent(float num, float total)

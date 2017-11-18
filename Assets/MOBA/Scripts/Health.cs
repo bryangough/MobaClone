@@ -15,16 +15,30 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
   public GameObject healthBarGameObject;
   public BarControl healthBar;
 
-  public bool destroyOnDeath;
+  public bool destroyOnDeath = true;
 
-  public override void OnStartClient()
+  void Start()
   {
     currentHealth = maxHealth;
+    if( healthBarGameObject != null)
+    {
+      GameObject bar = ObjectPool.instance.GetObjectForType(healthBarGameObject);
+      if( bar != null)
+      {
+        FollowObject follow = bar.GetComponent<FollowObject>();
+        if( follow != null )
+        {
+          follow.following = this.gameObject;
+        }
+        healthBar = bar.GetComponent<BarControl>();
+      }
+      
+    }
     if(healthBar!=null)
       healthBar.setPercent(currentHealth, maxHealth);
   }
 
-  public void takeDamage(int amount)
+  public bool takeDamage(int amount)
   {
     //isServer?
       currentHealth -= amount;
@@ -32,16 +46,28 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
       {
           if (destroyOnDeath)
           {
-              Destroy(gameObject);
               currentHealth = 0;
+              CombatHandler combatHandler = gameObject.GetComponent<CombatHandler>();
+              combatHandler.isActive = false;
+
+              if (  healthBar!= null  )
+              {
+                ObjectPool.instance.PoolObject(healthBar.gameObject);
+              }
+              this.gameObject.SetActive(false);
+              //Destroy(gameObject);
           }
           else
           {
-              currentHealth = maxHealth;
+              CombatHandler combatHandler = gameObject.GetComponent<CombatHandler>();
+              combatHandler.isActive = false;
+              //currentHealth = maxHealth;
               // called on the Server, will be invoked on the Clients
-              RpcRespawn();
+             // RpcRespawn();
           }
+          return true;
       }
+      return false;
   }
 
   void OnChangeHealth(int health)
