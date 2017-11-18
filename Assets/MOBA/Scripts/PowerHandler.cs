@@ -8,7 +8,7 @@ public class PowerHandler : MonoBehaviour {
 
 	public BasicPower[] powerData;
 	public UserPower[] powers;
-	public float cooldown;
+	//public float cooldown;
 	//public 
 	// Use this for initialization
 	void Start () {
@@ -34,10 +34,10 @@ public class PowerHandler : MonoBehaviour {
 		{
 			powers[x].updateCooldown(Time.deltaTime);
 		}
-		if(powers.Length>0)
+		/*if(powers.Length>0)
 		{
 			cooldown = powers[0].coolDownCounter;
-		}
+		}*/
 	}
 	public bool isPowerReady(int id)
 	{

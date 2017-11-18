@@ -263,7 +263,6 @@ MonoBehaviour:
   powerData:
   - {fileID: 11400000, guid: 7b10d4cd019b34981aa9268cd1d949a3, type: 2}
   powers: []
-  cooldown: 0
 --- !u!114 &114477107890558648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,7 +292,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerData: []
   powers: []
-  cooldown: 0
 --- !u!114 &114533651511206534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,7 +324,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isActive: 1
-  turretHandler: {fileID: 0}
+  turretHandler: {fileID: 114533651511206534}
   firePoint: {fileID: 0}
   controlTurret: 0
 --- !u!114 &114678088181246668
@@ -456,7 +454,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 9c3b0f3848e144c3990fdf34da561da9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

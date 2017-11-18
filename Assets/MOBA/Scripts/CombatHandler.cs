@@ -73,8 +73,16 @@ public class CombatHandler : NetworkBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if( !isServer && !isLocalPlayer)
+		{
+			return;
+		}
+//		Debug.Log(isServer+" "+name+" "+target+" "+powerHandler.isPowerReady(0));
 		//this shouldn't happen every frame
-		//usePower(0);
+		if( target != null && powerHandler.isPowerReady(0) )	
+		{
+			usePower(0);
+		}
 	}
 	//should maybe change this to not be so many ifs
 	public void displayError(string errorMessage)
@@ -90,7 +98,7 @@ public class CombatHandler : NetworkBehaviour
 			return false;
 		}
 		
-		if( !powerHandler.isPowerReady(powerId) )
+		if( !powerHandler.isPowerReady(powerId) && powerId>0 )
 		{
 			displayError("Power not ready.");
 			return false;

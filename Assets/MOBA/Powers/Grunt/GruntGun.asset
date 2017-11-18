@@ -18,13 +18,13 @@ MonoBehaviour:
   cost: 0
   scaling: 0
   cooldown: 5
-  castTime: 0
-  isChannel: 0
+  castTime: 2
+  isChannel: 1
   requiresTarget: 1
   requiresLineOfSite: 1
   alwaysTargetSelf: 0
   isToggle: 0
-  isInstant: 0
+  isInstant: 1
   damageType: 0
   targetType: 1
   buttonImg: {fileID: 0}
