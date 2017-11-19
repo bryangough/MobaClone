@@ -14,5 +14,25 @@ public class MakePower
         EditorUtility.FocusProjectWindow ();
         Selection.activeObject = asset;
     }
+
+    [MenuItem("Assets/Create/Cannon Option")]
+    public static void CannonOption()
+    {
+        CannonOption asset = ScriptableObject.CreateInstance<CannonOption> ();
+        AssetDatabase.CreateAsset (asset, "Assets/NewCannonOption.asset");
+        AssetDatabase.SaveAssets ();
+        EditorUtility.FocusProjectWindow ();
+        Selection.activeObject = asset;
+    }
+
+    [MenuItem("Assets/Create/Tank Base Option")]
+    public static void TankOption()
+    {
+        TankBaseOptions asset = ScriptableObject.CreateInstance<TankBaseOptions> ();
+        AssetDatabase.CreateAsset (asset, "Assets/NewTankOption.asset");
+        AssetDatabase.SaveAssets ();
+        EditorUtility.FocusProjectWindow ();
+        Selection.activeObject = asset;
+    }
     
 }

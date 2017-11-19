@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcacba73c358a413b8705e3dc0ced611, type: 3}
+  m_Name: Basic Tank
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1271614594111728, guid: 7cb5d3b9f2bf24921a803797395ebdc9, type: 2}
+  ui_image: {fileID: 0}
+  optionName: Basic Tank
+  description: 
+  armor: 0
+  speed: 0

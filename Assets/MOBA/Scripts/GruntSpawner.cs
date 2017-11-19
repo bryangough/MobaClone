@@ -26,6 +26,12 @@ public class GruntSpawner : NetworkBehaviour {
 			GameObject grunt = (GameObject)Instantiate(data.unitPrefab, this.transform.position + spawnPosition, Quaternion.identity);
 			CombatHandler gruntObj = grunt.GetComponent<CombatHandler>();
 			gruntObj.team = this.team;
+			grunt.name = "Grunt "+this.team;
+
+			
+			//SpriteRenderer renderer = grunt.GetComponent<SpriteRenderer>();
+			//renderer.color = Color.red;
+
 			WaypointMover gruntWaypoint = grunt.GetComponent<WaypointMover>();
 			gruntWaypoint.path = path;
 			gruntWaypoint.offset = spawnPosition;

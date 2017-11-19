@@ -427,11 +427,9 @@ MonoBehaviour:
   Entries:
   - Prefab: {fileID: 1734826069252022, guid: 80a4ab435c35648798dda11eedc0504d, type: 2}
     Count: 3
-    pool: []
     objectsInPool: 0
   - Prefab: {fileID: 1374591161350776, guid: e88986a0ad20e4da086e249692b523c3, type: 2}
     Count: 3
-    pool: []
     objectsInPool: 0
 --- !u!1 &182996977
 GameObject:
@@ -1095,6 +1093,7 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  leftStartPoint: {fileID: 1637146185}
 --- !u!114 &650349440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5011,7 +5010,7 @@ GameObject:
   - component: {fileID: 2124000300}
   - component: {fileID: 2124000299}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Main User UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -54,7 +54,8 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
               {
                 ObjectPool.instance.PoolObject(healthBar.gameObject);
               }
-              this.gameObject.SetActive(false);
+              combatHandler.isActive = false;
+              
               //Destroy(gameObject);
           }
           else
@@ -67,7 +68,7 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
           }
           if( attacker!= null )
           {
-            Debug.Log(attacker.name+" got last hit.");
+//            Debug.Log(attacker.name+" got last hit.");
           }
           return true;
       }
