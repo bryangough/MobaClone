@@ -17,7 +17,7 @@ public class Bullet : NetworkBehaviour
   { 
     if( isServer )
     {
-      target.health.takeDamage(payload.dmg);
+      target.health.takeDamage(payload.dmg, this.owner);
     }
     Destroy(gameObject);
   }

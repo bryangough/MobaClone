@@ -8,17 +8,20 @@ public class CombatHandler : NetworkBehaviour
 	public Team team;
 	public LayerMask myTeamLayerMask;
 	public LayerMask otherTeamLayerMask;
-	TargetableObject _targetedObject;
+	//
+	
 
 	public delegate void TargetChanged();
     public event TargetChanged targetChanged;
 	public bool isActive = true;
+	//
 	public TurretHandler turretHandler;
 	public GameObject firePoint;
-
+	//
 	public bool controlTurret = false;
 	PowerHandler powerHandler;
-	// Use this for initialization
+	//
+	TargetableObject _targetedObject;
 	[SerializeField]
 	public TargetableObject target
 	{
@@ -184,7 +187,10 @@ public class CombatHandler : NetworkBehaviour
 		}
 		return false;
 	}
+	public void didLastHit(GameObject attacker)
+	{
 
+	}
 	[Command]
 	void CmdUsePower(int powerId, GameObject targetGameObject, GameObject attacker)
 	{
@@ -210,7 +216,7 @@ public class CombatHandler : NetworkBehaviour
 							//even for instant, should I make it an object that is applied next frame?
 							if(power.isInstant)
 							{
-								bool defeated = target.health.takeDamage(power.dmg);
+								target.health.takeDamage(power.dmg, attacker);
 								usedPower = true;
 							}
 							else

@@ -38,7 +38,7 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
       healthBar.setPercent(currentHealth, maxHealth);
   }
 
-  public bool takeDamage(int amount)
+  public bool takeDamage(int amount, GameObject attacker)
   {
     //isServer?
       currentHealth -= amount;
@@ -64,6 +64,10 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
               //currentHealth = maxHealth;
               // called on the Server, will be invoked on the Clients
              // RpcRespawn();
+          }
+          if( attacker!= null )
+          {
+            Debug.Log(attacker.name+" got last hit.");
           }
           return true;
       }
