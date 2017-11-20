@@ -20,6 +20,14 @@ public class PathObject : MonoBehaviour {
 			return null;
 		return pathPoints[0];	
 	}
+	public PathPoint getLastPoint()
+	{
+		if(pathPoints==null)
+			return null;
+		if(pathPoints.Count==0)
+			return null;
+		return pathPoints[pathPoints.Count-1];	
+	}
 	void OnDrawGizmos() {
 		Vector3 last = Vector3.zero;
 		for(int i = 0; i < pathPoints.Count; i++)
@@ -58,7 +66,14 @@ public class PathObject : MonoBehaviour {
 			{
 				pathPoints[i].name = this.name +"_"+ i;
 				if(i!=0)
-					pathPoints[i-1].next = pathPoints[i];
+				{
+					pathPoints[i-1].next = pathPoints[i];	
+					pathPoints[i].prev = pathPoints[i-1];
+				}
+				else
+				{
+					pathPoints[i].prev = null;
+				}
 			}	
 		}
 		pathPoints.RemoveAll(PathPoint => PathPoint == null);

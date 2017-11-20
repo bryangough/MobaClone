@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 public class MobaNetworkManager : NetworkManager {
 
     public GameObject leftStartPoint;
+    public GameObject rightStartPoint;
+    public int numberOfPlayers = 0;
 //before this player should already be on teams and have their characters selected - from the lobby
     /*public override void OnClientConnect(NetworkConnection conn) {
          ClientScene.AddPlayer(conn, 0);
@@ -29,17 +31,22 @@ public class MobaNetworkManager : NetworkManager {
     public void createPlayer(NetworkConnection conn, short playerControllerId)
     {
         GameObject player;
-        Transform startPos = leftStartPoint.transform;
-        
-        if (startPos != null)
+        CombatHandler combatHandler;
+        if( numberOfPlayers%2==1 )
         {
-            player = (GameObject)Instantiate(playerPrefab, startPos.position, startPos.rotation);
+            player = (GameObject)Instantiate(playerPrefab, leftStartPoint.transform.position, Quaternion.identity);
+            combatHandler = player.GetComponent<CombatHandler>();
+            combatHandler.team = Team.Left;
         }
         else
         {
-            player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+            player = (GameObject)Instantiate(playerPrefab, rightStartPoint.transform.position, Quaternion.identity);
+            combatHandler = player.GetComponent<CombatHandler>();
+            combatHandler.team = Team.Right;
+            
         }
-
+        //Debug.Log("create player");
+        numberOfPlayers++;
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
     }
 }

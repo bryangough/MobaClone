@@ -8,13 +8,19 @@ public class WaypointMover : MovementHandler {
 	public PathObject path;
 	public PathPoint nextPoint;
 	public Vector3 offset;
+	public bool goReverse = false;
 
 	void Start () {
 		if( !isServer )
 			return;
 		if( path == null)
 			return;
-		nextPoint = path.getFirstPoint();
+		//if(CombatHandler)
+		if(goReverse)
+			nextPoint = path.getLastPoint();
+		else
+			nextPoint = path.getFirstPoint();
+		//
 		if( nextPoint!=null )
 		{
 			moveToLocation( nextPoint.transform.position + offset,  atWaypoint);

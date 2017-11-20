@@ -7,7 +7,8 @@ public class PathPoint : MonoBehaviour
 {
 	//public string name = "Path";
 	public PathPoint next;
-	public float delay = 0f;
+	public PathPoint prev;
+	//public float delay = 0f;
 	//
 	void Start()
 	{

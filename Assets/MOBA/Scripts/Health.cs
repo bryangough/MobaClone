@@ -47,24 +47,13 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
           if (destroyOnDeath)
           {
               currentHealth = 0;
-              CombatHandler combatHandler = gameObject.GetComponent<CombatHandler>();
-              combatHandler.isActive = false;
-
-              if (  healthBar!= null  )
-              {
-                ObjectPool.instance.PoolObject(healthBar.gameObject);
-              }
-              combatHandler.isActive = false;
-              
+              RpcShowDeath();
               //Destroy(gameObject);
           }
           else
           {
-              CombatHandler combatHandler = gameObject.GetComponent<CombatHandler>();
-              combatHandler.isActive = false;
-              //currentHealth = maxHealth;
-              // called on the Server, will be invoked on the Clients
-             // RpcRespawn();
+              currentHealth = 0;
+              RpcShowDeath();
           }
           if( attacker!= null )
           {
@@ -86,10 +75,21 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
   }
 
   [ClientRpc]
-  void RpcRespawn()
+  void RpcShowDeath()
   {
+    if( gameObject != null)
+    {
+      CombatHandler combatHandler = gameObject.GetComponent<CombatHandler>();
+      combatHandler.isActive = false;
+    }
+    if (  healthBar!= null  )
+    {
+      ObjectPool.instance.PoolObject(healthBar.gameObject);
+    }
+
     if (isLocalPlayer)
     {
+        
         //return to spawn, start repawn timer
         // move back to zero location
         //transform.position = Vector3.zero;

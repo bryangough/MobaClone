@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponname: Turret Gun
   description: 
-  dmg: 101
+  dmg: 51
   range: 40
   cost: 4
   scaling: 0

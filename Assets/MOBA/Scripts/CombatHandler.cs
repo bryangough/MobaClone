@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class CombatHandler : NetworkBehaviour 
 {
+	[SyncVar]
 	public Team team;
 	public LayerMask myTeamLayerMask;
 	public LayerMask otherTeamLayerMask;
@@ -40,9 +41,29 @@ public class CombatHandler : NetworkBehaviour
 			}
 		}
 	}
-	//public TargetableObject target;
-	void Start () {
+	
+	public override void  OnStartLocalPlayer()
+	{
+		MyPlayer.myTeam = team;
+		//this is a hack to run through existing Objects and set them to the right team colour.
+		CombatHandler[] combatHandlers = FindObjectsOfType(typeof(CombatHandler)) as CombatHandler[];
+        foreach (CombatHandler combatHandler in combatHandlers) 
+		{
+           combatHandler.setLocalColour();
+        }
+		//Debug.Log(gameObject.name+" OnStartLocalPlayer");
+	}
+	void Awake() 
+	{
+		//Debug.Log(gameObject.name+" Awake");
+		if( isLocalPlayer )
+		{
+			MyPlayer.myTeam = team;
+		}
 		
+	}
+	void Start () {
+		//Debug.Log(gameObject.name+" Start");
 		if(team == Team.Right)
 		{
 			myTeamLayerMask = LayerMask.GetMask("RightSide");
@@ -61,26 +82,24 @@ public class CombatHandler : NetworkBehaviour
 			otherTeamLayerMask = LayerMask.GetMask("RightSide", "LeftSide");
 			this.gameObject.layer = LayerMask.NameToLayer("Neutral");
 		}
-		controlTurret = isServer || isLocalPlayer;
-
 		powerHandler = this.GetComponent<PowerHandler>();
-
-		if( isLocalPlayer )
-		{
-			MyPlayer.myTeam = team;
-		}
-//Other team should be red.
-		SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+		controlTurret = isServer || isLocalPlayer;
+		
+		//Other team should be red.
+		setLocalColour();
+	}
+	public void setLocalColour()
+	{
+		SpriteRenderer[] renderers = gameObject.GetComponentsInChildren<SpriteRenderer>();
+		Color color = Color.white;;
 		if( this.team != MyPlayer.myTeam )
 		{
-			
-			renderer.color = Color.red;
+			color = Color.red;
 		}
-		else
+		for(int x=0; x<renderers.Length; x++)
 		{
-			renderer.color = Color.white;
+			renderers[x].color = color;
 		}
-		//this.gameObject.layer = 1 << myTeamLayerMask.value;
 	}
 
 	void OnDrawGizmos() 
@@ -315,7 +334,7 @@ public class CombatHandler : NetworkBehaviour
 	}
 	void OnDeactivate(bool isActive)
 	{
-		Debug.Log("On deactivate. "+isActive);
+//		Debug.Log("On deactivate. "+isActive);
 		this.gameObject.SetActive(isActive);
 	}
 

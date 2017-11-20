@@ -13,11 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponname: Basic Cannon
   description: 
-  dmg: 101
+  dmg: 10
   range: 10
   cost: 0
   scaling: 0
-  cooldown: 5
+  cooldown: 3
   castTime: 0
   isChannel: 0
   requiresTarget: 1

@@ -20,6 +20,9 @@ public class TurretHandler : MonoBehaviour {
 	{
 		animator.SetTrigger("fire");
 	}
+	public void stopFiring()
+	{
+	}
 	
 	// Update is called once per frame
 	void Update () {
