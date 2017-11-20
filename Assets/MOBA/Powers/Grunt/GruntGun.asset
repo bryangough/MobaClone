@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponname: Grunt Gun
   description: 
-  dmg: 2
+  dmg: 5
   range: 3
   cost: 0
   scaling: 0

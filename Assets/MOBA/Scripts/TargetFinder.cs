@@ -38,8 +38,8 @@ public class TargetFinder : NetworkBehaviour {
 				{
 					combatHandler.target = colliders[0].GetComponent<TargetableObject>();
 					searchForTarget = false;
-					delayCounter = 0;
 				}
+				delayCounter = 0;
 			}
 		}
 		//

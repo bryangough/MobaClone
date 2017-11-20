@@ -6,7 +6,8 @@ using UnityEngine.Networking;
 public class MovementHandler : NetworkBehaviour {
 
 	bool isAlive = true;
-	protected float stateTimer = 5;
+	protected float stateTimer = 0.25f;
+	protected float stateTimerTime = 0.25f;
 	public MOVEMENT_STATE currentState = MOVEMENT_STATE.IDLE;
 	//Animator animator;
 	//public Transform myTransform;
@@ -69,6 +70,10 @@ public class MovementHandler : NetworkBehaviour {
 	{
 		currentState = MOVEMENT_STATE.IDLE;
 	}
+	public virtual void keepMoving()
+	{
+
+	}
 	public void rotateBody()
 	{
 		transform.rotation = Quaternion.LookRotation(-Vector3.forward,  facing);
@@ -85,19 +90,22 @@ public class MovementHandler : NetworkBehaviour {
 	{
 		if(currentState==MOVEMENT_STATE.TARGET)
 		{
-			//if (stateTimer>0)
-			//{
+			if( target==null )
+			{
+				endMovement();
+			}
+			//re-adjust direction
+			if (stateTimer<=0)
+			{
+				doFacing(target.position);
+				stateTimer = stateTimerTime;
+			}
 				transform.position += facing * moveSpeed * Time.deltaTime;
 				Vector3 dist = target.position-transform.position;
 				dist.z = 0;
 				if(dist.sqrMagnitude<distanceFromTarget*distanceFromTarget)
 				{
-					currentState = MOVEMENT_STATE.IDLE;
-					//getWanderSpot();//callback 
-					if(moveCallback != null)
-					{
-						moveCallback();
-					}
+					endMovement();
 				}
 
 				/*
@@ -137,11 +145,7 @@ public class MovementHandler : NetworkBehaviour {
 				dist.z = 0;
 				if(dist.sqrMagnitude<distanceFromTarget*distanceFromTarget)
 				{
-					currentState = MOVEMENT_STATE.IDLE;
-					if(moveCallback != null)
-					{
-						moveCallback();
-					}
+					endMovement();
 					//getWanderSpot();//callback 
 				}
 			//}
@@ -152,6 +156,14 @@ public class MovementHandler : NetworkBehaviour {
 				else
 					//enterWander();//callback */
 			//}
+		}
+	}
+	public void endMovement()
+	{
+		currentState = MOVEMENT_STATE.IDLE;
+		if(moveCallback != null)
+		{
+			moveCallback();
 		}
 	}
 }

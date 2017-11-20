@@ -42,6 +42,7 @@ public class CombatHandler : NetworkBehaviour
 	}
 	//public TargetableObject target;
 	void Start () {
+		
 		if(team == Team.Right)
 		{
 			myTeamLayerMask = LayerMask.GetMask("RightSide");
@@ -63,6 +64,22 @@ public class CombatHandler : NetworkBehaviour
 		controlTurret = isServer || isLocalPlayer;
 
 		powerHandler = this.GetComponent<PowerHandler>();
+
+		if( isLocalPlayer )
+		{
+			MyPlayer.myTeam = team;
+		}
+//Other team should be red.
+		SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+		if( this.team != MyPlayer.myTeam )
+		{
+			
+			renderer.color = Color.red;
+		}
+		else
+		{
+			renderer.color = Color.white;
+		}
 		//this.gameObject.layer = 1 << myTeamLayerMask.value;
 	}
 
@@ -83,9 +100,16 @@ public class CombatHandler : NetworkBehaviour
 		}
 //		Debug.Log(isServer+" "+name+" "+target+" "+powerHandler.isPowerReady(0));
 		//this shouldn't happen every frame
-		if( target != null && powerHandler.isPowerReady(0) )	
+		if( target != null )	
 		{
-			usePower(0, true);
+			if ( !target.isAlive() )
+			{
+				target = null;
+			}
+			if( powerHandler.isPowerReady(0) )
+			{
+				usePower(0, true);
+			}
 		}
 	}
 	//should maybe change this to not be so many ifs
@@ -291,6 +315,7 @@ public class CombatHandler : NetworkBehaviour
 	}
 	void OnDeactivate(bool isActive)
 	{
+		Debug.Log("On deactivate. "+isActive);
 		this.gameObject.SetActive(isActive);
 	}
 

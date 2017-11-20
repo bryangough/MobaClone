@@ -1109,6 +1109,33 @@ MonoBehaviour:
   showGUI: 1
   offsetX: 0
   offsetY: 0
+--- !u!1 &792463236 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1732738617928976, guid: 8137356ecf15a437795ccf4c44a7f313,
+    type: 2}
+  m_PrefabInternal: {fileID: 1150923642}
+--- !u!114 &792463243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 792463236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9db3673a3864b61a00afd1d87cc921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+  myTeamLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  otherTeamLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  isActive: 1
+  turretHandler: {fileID: 0}
+  firePoint: {fileID: 0}
+  controlTurret: 0
 --- !u!1 &845660147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,10 +1558,6 @@ Prefab:
       propertyPath: path
       value: 
       objectReference: {fileID: 845660149}
-    - target: {fileID: 1732738617928976, guid: 8137356ecf15a437795ccf4c44a7f313, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8137356ecf15a437795ccf4c44a7f313, type: 2}
   m_IsPrefabParent: 0
@@ -1562,7 +1585,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1171764867}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 400, y: -319.79694, z: 0}
+  m_LocalPosition: {x: 400, y: -319.76743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2124000302}
@@ -1916,7 +1939,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1350238568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -400, y: -319.79694, z: 0}
+  m_LocalPosition: {x: -400, y: -319.76743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2124000302}
@@ -2057,7 +2080,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1593268412759890, guid: a6c81df0f9b814c74bde89c2ec95517f, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114081923060925810, guid: a6c81df0f9b814c74bde89c2ec95517f,
         type: 2}
@@ -4149,7 +4172,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1452018181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 400, y: 319.79694, z: 0}
+  m_LocalPosition: {x: 400, y: 319.76743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1663665256}
@@ -4318,7 +4341,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1458700969}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -400, y: 319.79694, z: 0}
+  m_LocalPosition: {x: -400, y: 319.76743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2124000302}
@@ -4616,6 +4639,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1765121443 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1732738617928976, guid: 8137356ecf15a437795ccf4c44a7f313,
+    type: 2}
+  m_PrefabInternal: {fileID: 2127037534}
+--- !u!61 &1765121444
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765121443}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.28, y: 1.28}
+  m_EdgeRadius: 0
+--- !u!114 &1765121445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765121443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9db3673a3864b61a00afd1d87cc921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 1
+  myTeamLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  otherTeamLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  isActive: 1
+  turretHandler: {fileID: 0}
+  firePoint: {fileID: 0}
+  controlTurret: 0
 --- !u!1 &1823145714
 GameObject:
   m_ObjectHideFlags: 0
@@ -4762,7 +4837,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1864070740}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -319.79694, z: 0}
+  m_LocalPosition: {x: 0, y: -319.76743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1622061713}
@@ -5080,8 +5155,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2124000298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 197, y: 157.5, z: 0}
-  m_LocalScale: {x: 0.4925, y: 0.4925, z: 0.4925}
+  m_LocalPosition: {x: 172, y: 137.5, z: 0}
+  m_LocalScale: {x: 0.43, y: 0.43, z: 0.43}
   m_Children:
   - {fileID: 1452018182}
   - {fileID: 1458700970}
@@ -5155,8 +5230,14 @@ Prefab:
       objectReference: {fileID: 71295293}
     - target: {fileID: 1732738617928976, guid: 8137356ecf15a437795ccf4c44a7f313, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114198673629214248, guid: 8137356ecf15a437795ccf4c44a7f313,
+        type: 2}
+      propertyPath: healthBarGameObject
+      value: 
+      objectReference: {fileID: 1734826069252022, guid: 80a4ab435c35648798dda11eedc0504d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8137356ecf15a437795ccf4c44a7f313, type: 2}
   m_IsPrefabParent: 0
@@ -5199,12 +5280,17 @@ MonoBehaviour:
   - {fileID: 2127037539}
   timer: {fileID: 156464370}
   spawns:
+  - time: 0
+    spawn:
+      unitPrefab: {fileID: 1423118945524760, guid: ec1394308d845486b89844ef9ae24d5e,
+        type: 2}
+      number: 1
   - time: 1
     spawn:
       unitPrefab: {fileID: 1423118945524760, guid: ec1394308d845486b89844ef9ae24d5e,
         type: 2}
-      number: 2
-  - time: 5
+      number: 1
+  - time: 2
     spawn:
       unitPrefab: {fileID: 1423118945524760, guid: ec1394308d845486b89844ef9ae24d5e,
         type: 2}

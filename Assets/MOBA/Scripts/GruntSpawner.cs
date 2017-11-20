@@ -29,8 +29,6 @@ public class GruntSpawner : NetworkBehaviour {
 			grunt.name = "Grunt "+this.team;
 
 			
-			//SpriteRenderer renderer = grunt.GetComponent<SpriteRenderer>();
-			//renderer.color = Color.red;
 
 			WaypointMover gruntWaypoint = grunt.GetComponent<WaypointMover>();
 			gruntWaypoint.path = path;

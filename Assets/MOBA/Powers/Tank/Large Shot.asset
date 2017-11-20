@@ -14,7 +14,7 @@ MonoBehaviour:
   weaponname: Large Shot
   description: 
   dmg: 40
-  range: 5
+  range: 10
   cost: 0
   scaling: 0
   cooldown: 10
@@ -29,3 +29,4 @@ MonoBehaviour:
   targetType: 1
   buttonImg: {fileID: 0}
   bullet: {fileID: 1338852124406488, guid: ca5869a38cc4143b384b1c4bb78b102c, type: 2}
+  explosion: {fileID: 0}

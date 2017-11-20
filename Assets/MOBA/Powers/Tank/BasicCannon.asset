@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponname: Basic Cannon
   description: 
-  dmg: 5
+  dmg: 101
   range: 10
   cost: 0
   scaling: 0
@@ -29,3 +29,4 @@ MonoBehaviour:
   targetType: 1
   buttonImg: {fileID: 0}
   bullet: {fileID: 0}
+  explosion: {fileID: 0}

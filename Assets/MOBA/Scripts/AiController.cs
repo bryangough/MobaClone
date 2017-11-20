@@ -64,6 +64,10 @@ public class AiController : NetworkBehaviour {
 			{
 				combatHandler.target = null;
 				targetFinder.getNewTarget();
+				if(movementHandler!=null)
+				{
+					movementHandler.keepMoving();
+				}
 				return;
 			}
 			if( !isBusy )
@@ -93,6 +97,10 @@ public class AiController : NetworkBehaviour {
 				{
 					combatHandler.target = null;
 					targetFinder.getNewTarget();
+					if(movementHandler!=null)
+					{
+						movementHandler.keepMoving();
+					}
 				}
 			}
 			//is currently doing action
@@ -102,6 +110,14 @@ public class AiController : NetworkBehaviour {
 			//combatHandler.
 			//if( targetRange)
 		}
+		else if( movementHandler!=null)
+		{
+			if( movementHandler.currentState == MOVEMENT_STATE.IDLE )
+			{
+				movementHandler.keepMoving();
+			}
+		}
+
 		//or become dead
 		/*if(combatHandler.target == null)
 		{

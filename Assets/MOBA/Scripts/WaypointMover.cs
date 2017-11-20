@@ -40,6 +40,11 @@ public class WaypointMover : MovementHandler {
 			moveToLocation( nextPoint.transform.position + offset,  atWaypoint);
 		}
 	}
+
+	public override void keepMoving()
+	{
+		continueToWaypoint();
+	}
 	
 	// Update is called once per frame
 	void Update () {
