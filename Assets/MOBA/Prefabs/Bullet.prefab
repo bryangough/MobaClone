@@ -86,8 +86,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6faffba47f64aca96ca47e0ba0eddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  payload: {fileID: 0}
-  target: {fileID: 0}
 --- !u!114 &114718189634273104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   target: {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 4
   distanceFromTarget: 0.2
 --- !u!212 &212939527372067314
 SpriteRenderer:
