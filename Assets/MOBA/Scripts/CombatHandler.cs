@@ -66,20 +66,20 @@ public class CombatHandler : NetworkBehaviour
 		//Debug.Log(gameObject.name+" Start");
 		if(team == Team.Right)
 		{
-			myTeamLayerMask = LayerMask.GetMask("RightSide");
-			otherTeamLayerMask = LayerMask.GetMask("LeftSide", "Neutral");
+			myTeamLayerMask = LayerMask.GetMask("RightSide", "Barriers");
+			otherTeamLayerMask = LayerMask.GetMask("LeftSide", "Neutral", "Barriers");
 			this.gameObject.layer = LayerMask.NameToLayer("RightSide");	
 		}
 		else if(team == Team.Left)
 		{
-			myTeamLayerMask = LayerMask.GetMask("LeftSide");
-			otherTeamLayerMask = LayerMask.GetMask("RightSide", "Neutral");
+			myTeamLayerMask = LayerMask.GetMask("LeftSide", "Barriers");
+			otherTeamLayerMask = LayerMask.GetMask("RightSide", "Neutral", "Barriers");
 			this.gameObject.layer = LayerMask.NameToLayer("LeftSide");
 		}
 		else//Neutral enenimes
 		{
-			myTeamLayerMask = LayerMask.GetMask("Neutral");
-			otherTeamLayerMask = LayerMask.GetMask("RightSide", "LeftSide");
+			myTeamLayerMask = LayerMask.GetMask("Neutral", "Barriers");
+			otherTeamLayerMask = LayerMask.GetMask("RightSide", "LeftSide", "Barriers");
 			this.gameObject.layer = LayerMask.NameToLayer("Neutral");
 		}
 		powerHandler = this.GetComponent<PowerHandler>();
@@ -224,6 +224,11 @@ public class CombatHandler : NetworkBehaviour
 		RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, target.transform.position, otherTeamLayerMask.value);
 		for( int x=0;x<hits.Length;x++)
 		{
+			if(hits[x].collider.name=="Trees")
+			{
+				return false;
+			}
+			//Debug.Log(hits[x].collider.name);
 			if (hits[x].transform == target.transform)
 			{
 				return true;

@@ -11,7 +11,7 @@ public class PowerHandler : MonoBehaviour {
 	//public float cooldown;
 	//public 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		CombatHandler combatHandler = this.GetComponent<CombatHandler>();
 		powers = new UserPower[powerData.Length];
 		for( int x=0;x<powerData.Length;x++)

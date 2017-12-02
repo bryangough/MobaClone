@@ -13,9 +13,13 @@ public class MovementHandler : NetworkBehaviour {
 	//public Transform myTransform;
 	protected Vector3 targetLocation;
 	public Transform target;
+	public Rigidbody2D rigidbody;
+	public bool useRigidbody = true;
 	public float moveSpeed = 0.1f; //move speed
 	public float distanceFromTarget = 0.2f;
-	protected Vector3 facing;
+	protected Vector2 facing;
+
+	public bool updateOnClient = false;
 
 	public delegate void MoveCallback();
     MoveCallback moveCallback;
@@ -25,13 +29,22 @@ public class MovementHandler : NetworkBehaviour {
 	}
 	protected void doStart()
 	{
+		rigidbody = this.GetComponent<Rigidbody2D>();
+		if( rigidbody == null)
+		{
+			useRigidbody = false;
+		}
 		if( !isServer )
 			return;
 	}
 	// Update is called once per frame
 	void Update () {
-		if( !isServer && !isLocalPlayer )
-			return;
+		if( !updateOnClient )
+		{
+			if( !isServer && !isLocalPlayer )
+				return;
+		}
+		
 		doUpdate();
 	}
 	public void moveToTarget(Transform target, MoveCallback callback)
@@ -63,7 +76,7 @@ public class MovementHandler : NetworkBehaviour {
 		facing = targetLocation - transform.position;
 		
 		facing.Normalize();
-		facing.z = 0;
+		//facing.z = 0;
 		rotateBody();
 	}
 	public void stopMoving()
@@ -76,7 +89,19 @@ public class MovementHandler : NetworkBehaviour {
 	}
 	public void rotateBody()
 	{
-		transform.rotation = Quaternion.LookRotation(-Vector3.forward,  facing);
+		if( useRigidbody )
+		{
+			float angle = Vector3.Angle(Vector3.down,  facing);
+			if(rigidbody != null)
+			{
+				//Debug.Log(angle+" "+ -Vector3.forward+" "+facing);
+				rigidbody.rotation = angle;
+			}
+		}
+		else
+		{
+			transform.rotation = Quaternion.LookRotation(-Vector3.forward,  facing);
+		}
 	}
 	protected void doUpdate () 
 	{
@@ -100,7 +125,15 @@ public class MovementHandler : NetworkBehaviour {
 				doFacing(target.position);
 				stateTimer = stateTimerTime;
 			}
-				transform.position += facing * moveSpeed * Time.deltaTime;
+				if(useRigidbody)
+				{
+					rigidbody.MovePosition( rigidbody.position + facing * moveSpeed * Time.deltaTime );
+				}
+				else
+				{
+					transform.position += (Vector3)(facing * moveSpeed * Time.deltaTime);
+				}
+				
 				Vector3 dist = target.position-transform.position;
 				dist.z = 0;
 				if(dist.sqrMagnitude<distanceFromTarget*distanceFromTarget)
@@ -140,7 +173,14 @@ public class MovementHandler : NetworkBehaviour {
 		{
 			//if ( stateTimer>0 )
 			//{
-				transform.position += facing * moveSpeed * Time.deltaTime;
+				if(useRigidbody)
+				{
+					rigidbody.MovePosition( rigidbody.position + facing * moveSpeed * Time.deltaTime );
+				}
+				else
+				{
+					transform.position += (Vector3)(facing * moveSpeed * Time.deltaTime);
+				}
 				Vector3 dist = targetLocation-transform.position;
 				dist.z = 0;
 				if(dist.sqrMagnitude<distanceFromTarget*distanceFromTarget)
@@ -161,6 +201,8 @@ public class MovementHandler : NetworkBehaviour {
 	public void endMovement()
 	{
 		currentState = MOVEMENT_STATE.IDLE;
+		if( !isServer && !isLocalPlayer )
+				return;
 		if(moveCallback != null)
 		{
 			moveCallback();

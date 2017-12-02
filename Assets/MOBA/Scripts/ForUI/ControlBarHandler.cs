@@ -10,6 +10,8 @@ public class ControlBarHandler : MonoBehaviour {
 	public PowerHandler powers;
 	public PlayerInputHandler playerInput;
 
+	public UI_PowerButton[] powerButtons;
+
 	public BarControl healthBar;
 	void Start () {
 		myPlayer.playerSet += playerIsSet;
@@ -25,6 +27,7 @@ public class ControlBarHandler : MonoBehaviour {
 			health.healthChange += updateBar;
 		}
 		powers = myPlayer.myPlayer.GetComponent<PowerHandler>();
+		powerButtons[0].boundPower = powers.powers[1];
 		playerInput = myPlayer.myPlayer.GetComponent<PlayerInputHandler>();
 	}
 	void updateBar(int newHealth)

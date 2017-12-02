@@ -99,8 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   target: {fileID: 0}
+  rigidbody: {fileID: 0}
   moveSpeed: 4
   distanceFromTarget: 0.2
+  updateOnClient: 1
 --- !u!212 &212939527372067314
 SpriteRenderer:
   m_ObjectHideFlags: 1

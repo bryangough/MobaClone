@@ -32,19 +32,19 @@ public class MobaNetworkManager : NetworkManager {
     {
         GameObject player;
         CombatHandler combatHandler;
-        if( numberOfPlayers%2==1 )
+        /*if( numberOfPlayers%2==1 )
         {
             player = (GameObject)Instantiate(playerPrefab, leftStartPoint.transform.position, Quaternion.identity);
             combatHandler = player.GetComponent<CombatHandler>();
             combatHandler.team = Team.Left;
         }
         else
-        {
+        {*/
             player = (GameObject)Instantiate(playerPrefab, rightStartPoint.transform.position, Quaternion.identity);
             combatHandler = player.GetComponent<CombatHandler>();
             combatHandler.team = Team.Right;
             
-        }
+        //}
         //Debug.Log("create player");
         numberOfPlayers++;
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);

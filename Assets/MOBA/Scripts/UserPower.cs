@@ -35,7 +35,9 @@ public class UserPower
 		{
 			coolDownCounter -= timeDelta;
 			if(coolDownCounter<0)
+			{
 				onCooldown = false;
+			}
 		}
 	}
 }
