@@ -18,7 +18,7 @@ public class MovementHandler : NetworkBehaviour {
 	public float moveSpeed = 0.1f; //move speed
 	public float distanceFromTarget = 0.2f;
 	protected Vector2 facing;
-
+	
 	public bool updateOnClient = false;
 
 	public delegate void MoveCallback();
@@ -47,6 +47,18 @@ public class MovementHandler : NetworkBehaviour {
 		
 		doUpdate();
 	}
+	protected void doUpdate () 
+	{
+		if(this.isAlive)
+		{
+			stateTimer -= Time.deltaTime;
+			stateCheck();
+		}
+	}
+
+	
+
+
 	public void moveToTarget(Transform target, MoveCallback callback)
 	{
 		currentState = MOVEMENT_STATE.TARGET;
@@ -91,10 +103,10 @@ public class MovementHandler : NetworkBehaviour {
 	{
 		if( useRigidbody )
 		{
-			float angle = Vector3.Angle(Vector3.down,  facing);
+			//SignedAngle gives the proper rotation.
+			float angle = Vector3.SignedAngle(Vector3.down,  facing, Vector3.forward);
 			if(rigidbody != null)
 			{
-				Debug.Log(angle);
 				rigidbody.rotation = angle;
 				rigidbody.angularVelocity = 0;
 			}
@@ -104,14 +116,7 @@ public class MovementHandler : NetworkBehaviour {
 			transform.rotation = Quaternion.LookRotation(-Vector3.forward,  facing);
 		}
 	}
-	protected void doUpdate () 
-	{
-		if(this.isAlive)
-		{
-			stateTimer -= Time.deltaTime;
-			stateCheck();
-		}
-	}
+	
 	protected void stateCheck()
 	{
 		if(currentState==MOVEMENT_STATE.TARGET)
@@ -173,6 +178,11 @@ public class MovementHandler : NetworkBehaviour {
 		}
 		else if(currentState==MOVEMENT_STATE.LOCATION)
 		{
+			if (stateTimer<=0)
+			{
+				doFacing(targetLocation);
+				stateTimer = stateTimerTime;
+			}
 			//if ( stateTimer>0 )
 			//{
 				if(useRigidbody)
@@ -211,7 +221,29 @@ public class MovementHandler : NetworkBehaviour {
 			moveCallback();
 		}
 	}
+
+	void OnDrawGizmos() {
+		
+		if(currentState==MOVEMENT_STATE.TARGET)
+		{
+			if(target!=null)
+			{
+				Gizmos.color = Color.cyan;
+				Gizmos.DrawLine(transform.position, target.position);
+			}
+		}
+		else if(currentState==MOVEMENT_STATE.LOCATION)
+		{
+			if(targetLocation!=null)
+			{
+				Gizmos.color = Color.cyan;
+				Gizmos.DrawLine(transform.position, targetLocation);
+			}
+		}
+		//
+	}
 }
+
 /*
 
 using UnityEngine;

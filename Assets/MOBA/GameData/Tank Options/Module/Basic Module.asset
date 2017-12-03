@@ -8,12 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcacba73c358a413b8705e3dc0ced611, type: 3}
-  m_Name: Basic Tank
+  m_Script: {fileID: 11500000, guid: daa89e60d4bf24d9896f17f3e668a9b2, type: 3}
+  m_Name: Basic Module
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1271614594111728, guid: 7cb5d3b9f2bf24921a803797395ebdc9, type: 2}
+  prefab: {fileID: 0}
   ui_image: {fileID: 0}
-  optionName: Basic Tank
+  optionName: 
   description: 
-  armor: 0
-  speed: 0
+  power3: {fileID: 0}
+  power4: {fileID: 0}

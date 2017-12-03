@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Name: Basic Cannon
   m_EditorClassIdentifier: 
   prefab: {fileID: 1491691717222758, guid: fae73adc393874ccfbd918267edf202a, type: 2}
-  ui_image: {fileID: 0}
+  ui_image: {fileID: 21300000, guid: 3370f6a9d76d04cb08d6e263e987f98d, type: 3}
   optionName: Basic Cannon
   description: 
   autoPower: {fileID: 11400000, guid: 1c60b1dae2ae34f6198158d38f78639e, type: 2}
   power1: {fileID: 11400000, guid: 2b27a91e2ac07492fbe42170d4fe8456, type: 2}
   power2: {fileID: 0}
+  effectors: []

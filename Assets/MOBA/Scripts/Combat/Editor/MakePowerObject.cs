@@ -28,7 +28,17 @@ public class MakePower
     [MenuItem("Assets/Create/Tank Base Option")]
     public static void TankOption()
     {
-        TankBaseOptions asset = ScriptableObject.CreateInstance<TankBaseOptions> ();
+        TankBaseOption asset = ScriptableObject.CreateInstance<TankBaseOption> ();
+        AssetDatabase.CreateAsset (asset, "Assets/NewTankOption.asset");
+        AssetDatabase.SaveAssets ();
+        EditorUtility.FocusProjectWindow ();
+        Selection.activeObject = asset;
+    }
+
+    [MenuItem("Assets/Create/Tank Module Option")]
+    public static void TankModule()
+    {
+        ModuleOption asset = ScriptableObject.CreateInstance<ModuleOption> ();
         AssetDatabase.CreateAsset (asset, "Assets/NewTankOption.asset");
         AssetDatabase.SaveAssets ();
         EditorUtility.FocusProjectWindow ();

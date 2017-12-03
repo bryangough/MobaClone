@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f1ef55bdb7f40cd815ab00bcb09af5, type: 3}
+  m_Name: Machine Cannon
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1491691717222758, guid: fae73adc393874ccfbd918267edf202a, type: 2}
+  ui_image: {fileID: 21300000, guid: 633408464b3f64daa8f04faaaa343a5d, type: 3}
+  optionName: Basic Cannon
+  description: 
+  autoPower: {fileID: 11400000, guid: 1c60b1dae2ae34f6198158d38f78639e, type: 2}
+  power1: {fileID: 11400000, guid: 2b27a91e2ac07492fbe42170d4fe8456, type: 2}
+  power2: {fileID: 0}
+  effectors: []

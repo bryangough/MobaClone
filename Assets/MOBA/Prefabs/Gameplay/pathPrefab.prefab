@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   next: {fileID: 0}
-  delay: 0
+  prev: {fileID: 0}
 --- !u!212 &212400786564334494
 SpriteRenderer:
   m_ObjectHideFlags: 1

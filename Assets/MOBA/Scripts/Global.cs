@@ -41,3 +41,12 @@ public enum Damage_TYPE
 {
     PHYSICAL
 }
+
+
+public enum ATTRIBUTE_TYPE
+{
+    SPEED,
+    ATTACK_POWER,
+    HP
+
+}

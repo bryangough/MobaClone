@@ -8,12 +8,14 @@ public class TurretHandler : MonoBehaviour {
 	Animator animator;
 	//public Transform turret;
 	public float offset = 90f;
+	float turretSpeed = 5f;
 	public Transform parent;
 	void Start () {
 		
 		parent = this.gameObject.transform.parent;
 		combatHandler = this.GetComponentInParent<CombatHandler>();
 		combatHandler.turretHandler = this;
+		combatHandler.targetChanged += targetChanged;
 		animator = this.GetComponent<Animator>();
 	}
 	public void fireCannon()
@@ -22,9 +24,17 @@ public class TurretHandler : MonoBehaviour {
 	}
 	public void stopFiring()
 	{
+		animator.Play("Idle");
+		
+	}
+	public void targetChanged()
+	{
+		if( combatHandler.target == null)
+		{
+			stopFiring();
+		}
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if( !combatHandler.controlTurret )
 		{
@@ -35,7 +45,8 @@ public class TurretHandler : MonoBehaviour {
 		{
 			if( transform.rotation != parent.rotation )
 			{
-				transform.rotation = parent.rotation;
+				float step = turretSpeed * Time.deltaTime;
+        		transform.rotation = Quaternion.RotateTowards(transform.rotation, parent.rotation, step);
 			}
 		}
 		else

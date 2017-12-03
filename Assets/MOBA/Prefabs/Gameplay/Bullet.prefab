@@ -100,6 +100,7 @@ MonoBehaviour:
   currentState: 0
   target: {fileID: 0}
   rigidbody: {fileID: 0}
+  useRigidbody: 1
   moveSpeed: 4
   distanceFromTarget: 0.2
   updateOnClient: 1
