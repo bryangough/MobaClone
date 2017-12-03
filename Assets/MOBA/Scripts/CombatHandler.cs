@@ -275,15 +275,19 @@ public class CombatHandler : NetworkBehaviour
 									firePoint.transform.position,
 									firePoint.transform.rotation);
 
-								MovementHandler movementHandler = bullet.GetComponent<MovementHandler>();
+								
 								Bullet bulletHandler = bullet.GetComponent<Bullet>();
 								bulletHandler.initialize( Object.Instantiate(power) as BasicPower, target, attacker );
+								NetworkServer.Spawn(bullet);
+								RpcSetBullet(bullet, targetGameObject);
 								
-								if( movementHandler!= null )
-								{
-									movementHandler.moveToTarget(target.transform, bulletHandler.deliverPayload);
-									NetworkServer.Spawn(bullet);
-								}								
+								MovementHandler movementHandler = bullet.GetComponent<MovementHandler>();
+								movementHandler.moveToTarget(target.transform, bulletHandler.deliverPayload);
+								//if( movementHandler!= null )
+								//{
+									
+									
+								//}								
 								//if(!isLocalPlayer)
 								//bullet.GetComponent<MeshRenderer>().material.color = Color.blue;
 							}
@@ -320,7 +324,22 @@ public class CombatHandler : NetworkBehaviour
 		// Destroy the bullet after 2 seconds
 		Destroy(bullet, 2.0f);*/
 	}
-	
+
+	//Bullets are represented on the client
+	//since targets aren't SyncVars we need to pass them to clients
+	//The payload isn't passed
+	// If a new user is added when this is in the air, it may not work
+	[ClientRpc]
+	void RpcSetBullet(GameObject bullet, GameObject target)
+	{
+		if( !isServer )
+		{
+			MovementHandler movementHandler = bullet.GetComponent<MovementHandler>();
+			movementHandler.moveToTarget(target.transform, null);
+		}
+			
+	}
+
 	[ClientRpc]
 	void RpcUsePower(int powerId)
 	{

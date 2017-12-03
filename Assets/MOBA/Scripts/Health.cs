@@ -17,6 +17,12 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
 
   public bool destroyOnDeath = true;
 
+  //SyncVars will be set for this
+  public override void OnStartClient()
+  {
+
+  }
+  //SyncVar may not be ready for this
   void Start()
   {
     currentHealth = maxHealth;

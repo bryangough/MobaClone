@@ -94,7 +94,7 @@ public class MovementHandler : NetworkBehaviour {
 			float angle = Vector3.Angle(Vector3.down,  facing);
 			if(rigidbody != null)
 			{
-				//Debug.Log(angle+" "+ -Vector3.forward+" "+facing);
+				Debug.Log(angle);
 				rigidbody.rotation = angle;
 				rigidbody.angularVelocity = 0;
 			}
