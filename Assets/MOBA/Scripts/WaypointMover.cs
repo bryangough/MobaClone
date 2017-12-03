@@ -11,6 +11,7 @@ public class WaypointMover : MovementHandler {
 	public bool goReverse = false;
 
 	void Start () {
+		doStart();
 		if( !isServer )
 			return;
 		if( path == null)

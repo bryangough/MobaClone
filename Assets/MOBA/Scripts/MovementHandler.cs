@@ -96,6 +96,7 @@ public class MovementHandler : NetworkBehaviour {
 			{
 				//Debug.Log(angle+" "+ -Vector3.forward+" "+facing);
 				rigidbody.rotation = angle;
+				rigidbody.angularVelocity = 0;
 			}
 		}
 		else
@@ -128,6 +129,7 @@ public class MovementHandler : NetworkBehaviour {
 				if(useRigidbody)
 				{
 					rigidbody.MovePosition( rigidbody.position + facing * moveSpeed * Time.deltaTime );
+					rigidbody.angularVelocity = 0;
 				}
 				else
 				{
@@ -176,6 +178,7 @@ public class MovementHandler : NetworkBehaviour {
 				if(useRigidbody)
 				{
 					rigidbody.MovePosition( rigidbody.position + facing * moveSpeed * Time.deltaTime );
+					rigidbody.angularVelocity = 0;
 				}
 				else
 				{
