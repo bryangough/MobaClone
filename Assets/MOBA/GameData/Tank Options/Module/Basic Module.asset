@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Name: Basic Module
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  ui_image: {fileID: 0}
-  optionName: 
+  ui_image: {fileID: 21300000, guid: 2ff9b769745064bb1a318c27cb2aba3a, type: 3}
+  optionName: Basic Module
   description: 
   power3: {fileID: 0}
   power4: {fileID: 0}
+  effectors: []

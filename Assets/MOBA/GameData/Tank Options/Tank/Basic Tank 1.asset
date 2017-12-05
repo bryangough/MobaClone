@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcacba73c358a413b8705e3dc0ced611, type: 3}
-  m_Name: Basic Tank
+  m_Name: Basic Tank 1
   m_EditorClassIdentifier: 
   prefab: {fileID: 1271614594111728, guid: 7cb5d3b9f2bf24921a803797395ebdc9, type: 2}
-  ui_image: {fileID: 21300000, guid: c3454ae3f00e04c509e826ddf2399202, type: 3}
+  ui_image: {fileID: 21300000, guid: e9eacf39699aa4f5e812db79a8adfa48, type: 3}
   optionName: Basic Tank
   description: 
   baseArmor: 5
