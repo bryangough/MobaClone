@@ -253,7 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   target: {fileID: 0}
-  rigidbody: {fileID: 0}
+  thisRigidbody: {fileID: 0}
   useRigidbody: 1
   moveSpeed: 1
   distanceFromTarget: 0.2
@@ -377,7 +377,7 @@ MonoBehaviour:
   movementHandler: {fileID: 0}
   isBusy: 0
   delayCounter: 0
-  checkDelay: 1
+  checkDelay: 0.5
   target: {fileID: 0}
 --- !u!212 &212887737898750272
 SpriteRenderer:
