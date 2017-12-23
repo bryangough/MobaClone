@@ -13,7 +13,7 @@ public class MovementHandler : NetworkBehaviour {
 	//public Transform myTransform;
 	protected Vector3 targetLocation;
 	public Transform target;
-	public Rigidbody2D rigidbody;
+	public Rigidbody2D thisRigidbody;
 	public bool useRigidbody = true;
 	public float moveSpeed = 0.1f; //move speed
 	public float distanceFromTarget = 0.2f;
@@ -29,8 +29,8 @@ public class MovementHandler : NetworkBehaviour {
 	}
 	protected void doStart()
 	{
-		rigidbody = this.GetComponent<Rigidbody2D>();
-		if( rigidbody == null)
+		thisRigidbody = this.GetComponent<Rigidbody2D>();
+		if( thisRigidbody == null)
 		{
 			useRigidbody = false;
 		}
@@ -105,10 +105,10 @@ public class MovementHandler : NetworkBehaviour {
 		{
 			//SignedAngle gives the proper rotation.
 			float angle = Vector3.SignedAngle(Vector3.down,  facing, Vector3.forward);
-			if(rigidbody != null)
+			if(thisRigidbody != null)
 			{
-				rigidbody.rotation = angle;
-				rigidbody.angularVelocity = 0;
+				thisRigidbody.rotation = angle;
+				thisRigidbody.angularVelocity = 0;
 			}
 		}
 		else
@@ -133,8 +133,8 @@ public class MovementHandler : NetworkBehaviour {
 			}
 				if(useRigidbody)
 				{
-					rigidbody.MovePosition( rigidbody.position + facing * moveSpeed * Time.deltaTime );
-					rigidbody.angularVelocity = 0;
+					thisRigidbody.MovePosition( thisRigidbody.position + facing * moveSpeed * Time.deltaTime );
+					thisRigidbody.angularVelocity = 0;
 				}
 				else
 				{
@@ -187,8 +187,8 @@ public class MovementHandler : NetworkBehaviour {
 			//{
 				if(useRigidbody)
 				{
-					rigidbody.MovePosition( rigidbody.position + facing * moveSpeed * Time.deltaTime );
-					rigidbody.angularVelocity = 0;
+					thisRigidbody.MovePosition( thisRigidbody.position + facing * moveSpeed * Time.deltaTime );
+					thisRigidbody.angularVelocity = 0;
 				}
 				else
 				{
@@ -234,11 +234,11 @@ public class MovementHandler : NetworkBehaviour {
 		}
 		else if(currentState==MOVEMENT_STATE.LOCATION)
 		{
-			if(targetLocation!=null)
-			{
+			//if(targetLocation!=null)
+			//{
 				Gizmos.color = Color.cyan;
 				Gizmos.DrawLine(transform.position, targetLocation);
-			}
+			//}
 		}
 		//
 	}

@@ -50,14 +50,17 @@ public class PlayerInputHandler : NetworkBehaviour
 		if (Input.GetKeyDown(KeyCode.W))
 		{
 			Debug.Log("W");
+			combatHandler.usePower(2);
 		}
 		if (Input.GetKeyDown(KeyCode.E))
 		{
 			Debug.Log("E");
+			combatHandler.usePower(3);
 		}
 		if (Input.GetKeyDown(KeyCode.R))
 		{
 			Debug.Log("R");
+			combatHandler.usePower(4);
 		}
 		//
 		if (Input.GetKeyDown(KeyCode.S))
@@ -65,10 +68,78 @@ public class PlayerInputHandler : NetworkBehaviour
 			//stop attack and stop moving
 			Debug.Log("S");
 		}
-
-        if (Input.GetButtonDown("Fire1"))
+		//Split movement and selecting to 2 different buttons
+		//Need to implmement move to 
+		//select
+		if (Input.GetButtonDown("Fire1"))
+		{
+			var mousePos = Input.mousePosition;
+   			mousePos.z = 10;
+			RaycastHit2D[] hits = Physics2D.RaycastAll (Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero);
+			int foundPriority = -1;
+			GameObject selected;
+			for(int x=0;x<hits.Length;x++)
+			{
+				RaycastHit2D hit = hits[x];
+				if(hit.collider != null)
+				{
+					//square = hit.collider.gameObject.GetComponent<Square>();
+					selected = hit.collider.gameObject;
+					if(selected.tag != "Ground")
+					{
+						foundPriority = 1;
+						touched = selected;
+					}
+				}
+			}
+			if( touched==null )
+			{
+				return;
+			}
+			TargetableObject targetable = touched.GetComponent<TargetableObject>();
+			if( targetable != null )
+			{
+				combatHandler.target = targetable;
+			}
+			//movementHandler.moveToTarget(touched.transform);
+		}
+		//move
+        else if (Input.GetButtonDown("Fire2"))
         {
 			var mousePos = Input.mousePosition;
+   			mousePos.z = 10;
+			RaycastHit2D[] hits = Physics2D.RaycastAll (Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero);
+			int foundPriority = -1;
+			GameObject selected;
+			for(int x=0;x<hits.Length;x++)
+			{
+				RaycastHit2D hit = hits[x];
+				if(hit.collider != null)
+				{
+					//square = hit.collider.gameObject.GetComponent<Square>();
+					selected = hit.collider.gameObject;
+					if(selected.tag == "Ground" && foundPriority<=-1)
+					{
+						foundPriority = 0;
+						touched = selected;
+					}
+				}
+			}
+			if( touched==null )
+			{
+				return;
+			}
+			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			pos.z = 0;
+			movementHandler.moveToLocation(pos);
+		}
+	}
+}
+
+/*
+//Combined
+
+var mousePos = Input.mousePosition;
    			mousePos.z = 10;
 			RaycastHit2D[] hits = Physics2D.RaycastAll (Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero);
 			int foundPriority = -1;
@@ -113,5 +184,6 @@ public class PlayerInputHandler : NetworkBehaviour
 				//movementHandler.moveToTarget(touched.transform);
 			}
 		}
-	}
-}
+
+
+ */

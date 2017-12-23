@@ -26,7 +26,16 @@ public class PowerHandler : MonoBehaviour {
 
 		return false;
 	}
-	
+
+	void OnDrawGizmosSelected()
+    {
+		for( int x=0;x<powerData.Length;x++)
+		{
+        	// Display the explosion radius when selected
+        	Gizmos.color = new Color(1, 0, 1, 0.75F);
+        	Gizmos.DrawWireSphere(transform.position, powerData[x].range);
+		}
+    }
 	// Update is called once per frame
 	void Update () {
 		//update

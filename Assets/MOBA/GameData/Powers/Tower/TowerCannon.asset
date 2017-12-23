@@ -14,11 +14,11 @@ MonoBehaviour:
   weaponname: Turret Gun
   description: 
   dmg: 51
-  range: 40
+  range: 2
   cost: 4
   scaling: 0
   cooldown: 5
-  castTime: 0
+  castTime: 2
   isChannel: 0
   requiresTarget: 1
   requiresLineOfSite: 1

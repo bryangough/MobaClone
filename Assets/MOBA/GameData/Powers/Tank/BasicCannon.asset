@@ -14,7 +14,7 @@ MonoBehaviour:
   weaponname: Basic Cannon
   description: 
   dmg: 10
-  range: 10
+  range: 4
   cost: 0
   scaling: 0
   cooldown: 3

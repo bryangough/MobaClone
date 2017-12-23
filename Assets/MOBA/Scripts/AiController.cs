@@ -26,6 +26,22 @@ public class AiController : NetworkBehaviour {
 		movementHandler = this.GetComponent<MovementHandler>();
 		
 	}
+	void Update () 
+	{
+		if( !isServer )
+		{
+			return;
+		}
+		target = combatHandler.target;
+		delayCounter += Time.deltaTime;
+		//I'll establish a queue system so AI actions are not run every frame and can be spread out a bit
+		// For now I'll have it check every second
+		if(delayCounter > checkDelay)
+		{
+			delayCounter = 0;
+			doChecks();	
+		}
+	}
 	void targetChanged()
 	{
 		delayCounter = checkDelay;
@@ -43,22 +59,7 @@ public class AiController : NetworkBehaviour {
     }
     public TargetableObject target;
 	// Update is called once per frame
-	void Update () 
-	{
-		if( !isServer )
-		{
-			return;
-		}
-		target = combatHandler.target;
-		delayCounter += Time.deltaTime;
-		//I'll establish a queue system so AI actions are not run every frame and can be spread out a bit
-		// For now I'll have it check every second
-		if(delayCounter > checkDelay)
-		{
-			delayCounter = 0;
-			doChecks();	
-		}
-	}
+	
 //if isbusy - wait until attack is done or timer is done?
 	
 	public void doChecks()

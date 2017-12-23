@@ -14,7 +14,7 @@ MonoBehaviour:
   weaponname: Large Shot
   description: 
   dmg: 40
-  range: 10
+  range: 4
   cost: 0
   scaling: 0
   cooldown: 10

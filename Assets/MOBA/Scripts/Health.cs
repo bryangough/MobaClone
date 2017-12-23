@@ -34,7 +34,7 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
         FollowObject follow = bar.GetComponent<FollowObject>();
         if( follow != null )
         {
-          follow.following = this.gameObject;
+          follow.setFollowing(this.gameObject);
         }
         healthBar = bar.GetComponent<BarControl>();
       }

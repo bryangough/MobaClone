@@ -9,10 +9,12 @@ public class UserPower
 	public float coolDownCounter = 0;
 	public bool onCooldown = false;
 	public CombatHandler combatHandler;
+	public bool isInitialized = false;
 	public void initialize (CombatHandler combatHandler, BasicPower power)
 	{
 		this.power = power;
 		this.combatHandler = combatHandler;
+		isInitialized = true;
 	}
     public bool usePower()
 	{

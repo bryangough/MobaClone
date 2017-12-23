@@ -27,7 +27,11 @@ public class ControlBarHandler : MonoBehaviour {
 			health.healthChange += updateBar;
 		}
 		powers = myPlayer.myPlayer.GetComponent<PowerHandler>();
-		powerButtons[0].boundPower = powers.powers[1];
+		/*for(int x=0;x<powers.powers.Length;x++)
+		{
+			powerButtons[0].setBound( powers.powers[1] );
+		}*/
+		powerButtons[0].setBound( powers.powers[1] );
 		playerInput = myPlayer.myPlayer.GetComponent<PlayerInputHandler>();
 	}
 	void updateBar(int newHealth)

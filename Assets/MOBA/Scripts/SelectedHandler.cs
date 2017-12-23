@@ -26,13 +26,13 @@ public class SelectedHandler : MonoBehaviour
 	{
 		if( combatHandler.target != null )
 		{
-			followObject.following = combatHandler.target.gameObject;
+			followObject.setFollowing(combatHandler.target.gameObject);
 			spriteRenderer.enabled = true;
 		}
 		else
 		{
 			spriteRenderer.enabled = false;
-			followObject.following = null;
+			followObject.reset();
 		}
 		
 	}
