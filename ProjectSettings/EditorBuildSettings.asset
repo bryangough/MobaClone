@@ -8,6 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MOBA/Scenes/NewTileMap.unity
     guid: e7343a1a26dad462c9febc95539efddb
-  - enabled: 1
+  - enabled: 0
     path: Assets/MOBA/Scenes/Just tank.unity
     guid: 10a2226dee92643e1b61a1439bbfb3d5

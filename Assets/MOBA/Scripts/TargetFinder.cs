@@ -10,7 +10,15 @@ public class TargetFinder : NetworkBehaviour {
 	public float delayCounter = 0;
 	
 	CombatHandler combatHandler;
-	void Start()
+
+    void OnDrawGizmosSelected()
+    {
+        // Display the explosion radius when selected
+        Gizmos.color = new Color(1, 0, 1, 0.75F);
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    void Start()
 	{
 		//layerMask = 1 << LayerMask.NameToLayer("LeftSide");
 		combatHandler = this.GetComponent<CombatHandler>();

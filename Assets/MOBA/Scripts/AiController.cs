@@ -35,7 +35,13 @@ public class AiController : NetworkBehaviour {
 			targetFinder.getNewTarget();
 		}
 	}
-	public TargetableObject target;
+    void OnDrawGizmosSelected()
+    {
+        // Display the explosion radius when selected
+        Gizmos.color = new Color(1, 1, 0, 0.75F);
+        Gizmos.DrawWireSphere(transform.position, targetRange);
+    }
+    public TargetableObject target;
 	// Update is called once per frame
 	void Update () 
 	{

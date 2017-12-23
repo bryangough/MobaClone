@@ -66,8 +66,8 @@ public class PlayerInputHandler : NetworkBehaviour
 			Debug.Log("S");
 		}
 
-		if( Input.GetMouseButtonDown(0) )
-		{
+        if (Input.GetButtonDown("Fire1"))
+        {
 			var mousePos = Input.mousePosition;
    			mousePos.z = 10;
 			RaycastHit2D[] hits = Physics2D.RaycastAll (Camera.main.ScreenToWorldPoint(mousePos), Vector2.zero);
