@@ -82,7 +82,7 @@ public class PlayerChat : NetworkBehaviour {
 		}
 	}
 	[TargetRpc]
-    public void RpcSendPrivateMessage(NetworkConnection target)
+    public void TargetSendPrivateMessage(NetworkConnection target)
     {
         //MessageType.Private
     }
@@ -92,7 +92,7 @@ public class PlayerChat : NetworkBehaviour {
 	//call this for each client
 	//connectionToClient? don't think so.
 	[TargetRpc]
-    public void RpcSendTeamChatMessage(NetworkConnection target, string message, MessageType type)
+    public void TargetSendTeamChatMessage(NetworkConnection target, string message, MessageType type)
     {
         //MessageType.Private
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public delegate void PlayerListChange(PlayerChat player);
 public class UIPlayerList : MonoBehaviour {
 
 	public LocalPlayerList myList;
@@ -30,9 +31,8 @@ public class UIPlayerList : MonoBehaviour {
 	{
 		//create game object
 		GameObject gameObject = Instantiate(textPrefab, Vector3.zero , Quaternion.identity);
-		Text text = gameObject.GetComponent<Text>();
-		//time?
-		text.text = ""+player.userName +"";
+		UIPlayerNameHandler handler = gameObject.GetComponent<UIPlayerNameHandler>();
+		handler.setInit(player);
 		gameObject.transform.parent = this.transform;
 	}
 	public void removePlayer(PlayerChat player)

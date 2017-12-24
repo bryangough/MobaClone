@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void MyPlayerSet();
 public class MyChatPlayer : MonoBehaviour {
 	
-	public delegate void MyPlayerSet();
-  	public event MyPlayerSet playerSet;
+	//public delegate void MyPlayerSet();
+	public event MyPlayerSet playerSet;
 	private GameObject _myPlayer;
 	public GameObject myPlayer
 	{

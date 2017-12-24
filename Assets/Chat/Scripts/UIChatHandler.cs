@@ -43,7 +43,7 @@ public class UIChatHandler : MonoBehaviour {
 		//time?
 		text.text = ""+player.userName +": "+ message;
 		gameObject.transform.parent = messageArea.transform;
-		gameObject.transform.SetSiblingIndex(0);
+		//gameObject.transform.SetSiblingIndex(0);
 		messages.Add(gameObject);
 print("addText");
 		if(messages.Count>maxNumberOfText)

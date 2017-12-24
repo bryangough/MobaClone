@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LocalPlayerList : MonoBehaviour {
 	
-	public delegate void PlayerListChange(PlayerChat player);
   	public event PlayerListChange addPlayer;
 	public event PlayerListChange removePlayer;
 	protected List<PlayerChat> _players = new List<PlayerChat>();
