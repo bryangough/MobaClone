@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class PlayerChat : NetworkBehaviour {
 
-	public delegate void PlayerChatChange(PlayerChat player, string message);
+	public delegate void PlayerChatChange(PlayerChat player, string message, MessageType type);
   	public event PlayerChatChange newMessage;
 
 	public delegate void PlayerNameChanged(string name);
@@ -39,33 +39,63 @@ public class PlayerChat : NetworkBehaviour {
 
 		//register this UI
 	}
-	
-
-
-	public void SendChatMessage(string message)
+	// Updates my own username.
+	//This does not require a RPC because userName is a SyncVar with a hook
+	public void UpdateMyName(string newName)
 	{
-		CmdSendChatMessage(message);
+		//check if username is unique
+
+		//
+		if(isLocalPlayer)
+		{
+			CmdUpdateMyName(newName);
+		}
 	}
 	[Command]
-	void CmdSendChatMessage(string message)
+	void CmdUpdateMyName(string newName)
+  	{
+		  userName = newName;
+  	}
+	// Sends the text message to the server
+	public void SendChatMessage(string message)
+	{
+		CmdSendChatMessage(message, MessageType.Normal);
+	}
+	[Command]
+	void CmdSendChatMessage(string message, MessageType type)
   	{
 		  // check for dirty language
 		
-		  RpcSendChatChat(message);
+		  RpcSendChatMessage(message, type);
   	}
 
 //Happens on client
 
 	[ClientRpc]
-	void RpcSendChatChat(string message)
+	void RpcSendChatMessage(string message, MessageType type)
 	{
 		print(userName+" "+message);
 		if( newMessage != null)
 		{
 			print(newMessage+" newMessage");
-			newMessage(this, message);
+			newMessage(this, message, type);
 		}
 	}
+	[TargetRpc]
+    public void RpcSendPrivateMessage(NetworkConnection target)
+    {
+        //MessageType.Private
+    }
+
+	//To send messages only to my team
+	//Have list of gameObjects in team
+	//call this for each client
+	//connectionToClient? don't think so.
+	[TargetRpc]
+    public void RpcSendTeamChatMessage(NetworkConnection target, string message, MessageType type)
+    {
+        //MessageType.Private
+    }
 	void OnUserNameChange(string newName)
 	{
 		if( nameChanged != null)

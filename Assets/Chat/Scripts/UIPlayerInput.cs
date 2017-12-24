@@ -18,6 +18,8 @@ public class UIPlayerInput : MonoBehaviour {
 	void playerIsSet()
 	{
 		playerChat = myPlayer.myPlayer.GetComponent<PlayerChat>();
+		
+		
 		inputField.interactable = true;
 	}
 

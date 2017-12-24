@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-/*public enum MessageType
-{
-    normal,
-    private,
-    emote
-}*/
+
 public class UIChatHandler : MonoBehaviour {
 
 	public LocalPlayerList myList;
@@ -34,7 +29,7 @@ public class UIChatHandler : MonoBehaviour {
 		print("add player"+player);
 		player.newMessage += messageFromPlayer;
 	}
-	public void messageFromPlayer(PlayerChat player, string message)
+	public void messageFromPlayer(PlayerChat player, string message, MessageType type)
 	{
 		print("messageFromPlayer");
 		addText(player, message);
@@ -48,6 +43,7 @@ public class UIChatHandler : MonoBehaviour {
 		//time?
 		text.text = ""+player.userName +": "+ message;
 		gameObject.transform.parent = messageArea.transform;
+		gameObject.transform.SetSiblingIndex(0);
 		messages.Add(gameObject);
 print("addText");
 		if(messages.Count>maxNumberOfText)
