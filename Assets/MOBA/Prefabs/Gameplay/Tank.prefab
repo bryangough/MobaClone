@@ -252,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   target: {fileID: 0}
-  rigidbody: {fileID: 0}
+  thisRigidbody: {fileID: 0}
   useRigidbody: 1
   moveSpeed: 2.5
   distanceFromTarget: 0.1

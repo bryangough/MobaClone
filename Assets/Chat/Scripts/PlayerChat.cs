@@ -13,7 +13,14 @@ public class PlayerChat : NetworkBehaviour {
 
 	[SyncVar(hook = "OnUserNameChange")]
 	public string userName = "User";
-
+	void Awake()
+	{
+		print("Awake.");
+	}
+	void Start()
+	{
+		print("Start.");
+	}
 	public override void OnStartClient()
 	{
 		base.OnStartClient();
@@ -34,17 +41,15 @@ public class PlayerChat : NetworkBehaviour {
 	{
 		base.OnStartLocalPlayer();
 
+		//register this UI
 		MyChatPlayer myPlayer = FindObjectOfType(typeof(MyChatPlayer)) as MyChatPlayer;
 		myPlayer.myPlayer = this.gameObject;
 
-		//register this UI
 	}
 	// Updates my own username.
 	//This does not require a RPC because userName is a SyncVar with a hook
 	public void UpdateMyName(string newName)
 	{
-		//check if username is unique
-
 		//
 		if(isLocalPlayer)
 		{
@@ -54,6 +59,7 @@ public class PlayerChat : NetworkBehaviour {
 	[Command]
 	void CmdUpdateMyName(string newName)
   	{
+		  //check if username is unique on server
 		  userName = newName;
   	}
 	// Sends the text message to the server

@@ -9,11 +9,15 @@ To speed up testing. This script will automatically start the host but only in t
 
  */
 public class AutoHostNetwork : MonoBehaviour {
-	#if UNITY_EDITOR
+	
 	private NetworkManager manager;
 	public bool autoStartHost = true;
+	//public bool startLocal = true;
 	void Awake()
 	{
+		#if !UNITY_EDITOR
+			autoStartHost = false;
+		#endif
 		manager = GetComponent<NetworkManager>();
 	}
  
@@ -24,7 +28,11 @@ public class AutoHostNetwork : MonoBehaviour {
 		{
 			manager.StartHost();
 		}
+		/*if(startLocal)
+		{
+			
+		}*/
 		
 	}
-	#endif
+	
 }

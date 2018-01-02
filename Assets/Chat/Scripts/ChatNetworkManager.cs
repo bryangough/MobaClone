@@ -57,10 +57,10 @@ public class ChatNetworkManager : NetworkManager {
 		}*/
     }
 
-	public void OnPlayerDisconnected(NetworkPlayer player)
+	/*public void OnPlayerDisconnected(NetworkPlayer player)
 	{
 		numberOfPlayers--;
 		Debug.Log("disconnect player.");
-	}
+	}*/
 }
 

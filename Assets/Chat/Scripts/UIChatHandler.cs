@@ -31,7 +31,7 @@ public class UIChatHandler : MonoBehaviour {
 	}
 	public void messageFromPlayer(PlayerChat player, string message, MessageType type)
 	{
-		print("messageFromPlayer");
+		//print("messageFromPlayer");
 		addText(player, message);
 	}
 //Chat messages won't be synced by the server. Newer players won't see older messages
@@ -42,10 +42,10 @@ public class UIChatHandler : MonoBehaviour {
 		Text text = gameObject.GetComponent<Text>();
 		//time?
 		text.text = ""+player.userName +": "+ message;
-		gameObject.transform.parent = messageArea.transform;
+		gameObject.transform.SetParent(messageArea.transform);
 		//gameObject.transform.SetSiblingIndex(0);
 		messages.Add(gameObject);
-print("addText");
+		//print("addText");
 		if(messages.Count>maxNumberOfText)
 		{
 			//remove
