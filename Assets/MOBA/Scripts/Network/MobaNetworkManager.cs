@@ -8,17 +8,47 @@ public class MobaNetworkManager : NetworkManager {
     public GameObject leftStartPoint;
     public GameObject rightStartPoint;
     public int numberOfPlayers = 0;
-//before this player should already be on teams and have their characters selected - from the lobby
+    //before this player should already be on teams and have their characters selected - from the lobby
     /*public override void OnClientConnect(NetworkConnection conn) {
          ClientScene.AddPlayer(conn, 0);
      }*/
+
+     // Set this in the inspector
+    public UnetGameRoom GameRoom;
+
+    void Awake()
+    {
+        if (GameRoom == null)
+        {
+            Debug.LogError("Game Room property is not set on NetworkManager");
+            return;
+        }
+
+        // Subscribe to events
+        GameRoom.PlayerJoined += OnPlayerJoined;
+        GameRoom.PlayerLeft += OnPlayerLeft;
+    }
+
+    private void OnPlayerJoined(UnetMsfPlayer player)
+    {
+        // Spawn the player object (https://docs.unity3d.com/Manual/UNetPlayers.html)
+        // This is just a dummy example, you'll need to create your own object (or not)
+       // var playerGameObject = new GameObject();
+       // NetworkServer.AddPlayerForConnection(player.Connection, playerGameObject, 0);
+       createPlayer(player.Connection, 0);
+    }
+
+    private void OnPlayerLeft(UnetMsfPlayer player)
+    {
+        numberOfPlayers--;
+    }
  
-     public override void OnServerAddPlayer (NetworkConnection conn, short playerControllerId) {
+     /*public override void OnServerAddPlayer (NetworkConnection conn, short playerControllerId) {
          print ("Adding player. ");
          createPlayer(conn, playerControllerId);
          //OnServerAddPlayer (conn, playerControllerId);
-     }
-	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
+     }*/
+	/*public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
     {
         Debug.Log("Adding player. Message");
         //GameObject player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
@@ -26,8 +56,14 @@ public class MobaNetworkManager : NetworkManager {
         //NetworkServer.ReplacePlayerForConnection
         //Debug.Log("create player");
         OnServerAddPlayer(conn, playerControllerId, extraMessageReader);
-    }
-
+    }*/
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        base.OnServerDisconnect(conn);
+        // Don't forget to notify the room that a player disconnected
+        GameRoom.ClientDisconnected(conn);
+    }    
+    
     public void createPlayer(NetworkConnection conn, short playerControllerId)
     {
         GameObject player;
