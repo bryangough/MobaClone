@@ -5643,17 +5643,17 @@ Prefab:
     - target: {fileID: 114188534054329030, guid: 037e29273f942a9479698f51b3c60b50,
         type: 2}
       propertyPath: AutoStartInEditor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114188534054329030, guid: 037e29273f942a9479698f51b3c60b50,
         type: 2}
       propertyPath: StartServerAsHost
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114188534054329030, guid: 037e29273f942a9479698f51b3c60b50,
         type: 2}
       propertyPath: AutoJoinRoom
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114188534054329030, guid: 037e29273f942a9479698f51b3c60b50,
         type: 2}

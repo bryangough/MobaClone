@@ -30,7 +30,8 @@ public class MsfQuickBuildMoba
         if (string.IsNullOrEmpty(path))
             return;
 
-        BuildMasterAndSpawner(path);
+        BuildMaster(path);
+        BuildSpawner(path);
         BuildClient(path);
         BuildGameServer(path);
     }
@@ -39,14 +40,28 @@ public class MsfQuickBuildMoba
     /// Creates a build for master server and spawner
     /// </summary>
     /// <param name="path"></param>
-    public static void BuildMasterAndSpawner(string path)
+    public static void BuildMaster(string path)
     {
         var masterScenes = new[]
         {
-            QuickSetupRoot+ "/Scenes/MasterAndSpawner.unity"
+            QuickSetupRoot+ "/Scenes/Master.unity"
         };
 
-        BuildPipeline.BuildPlayer(masterScenes, path + "/MasterAndSpawner.app", TargetPlatform, BuildOptions);
+        BuildPipeline.BuildPlayer(masterScenes, path + "/Master.app", TargetPlatform, BuildOptions);
+    }
+
+    /// <summary>
+    /// Creates a build for master server and spawner
+    /// </summary>
+    /// <param name="path"></param>
+    public static void BuildSpawner(string path)
+    {
+        var masterScenes = new[]
+        {
+            QuickSetupRoot+ "/Scenes/Spawner.unity"
+        };
+
+        BuildPipeline.BuildPlayer(masterScenes, path + "/Spawner.app", TargetPlatform, BuildOptions);
     }
 
     /// <summary>
@@ -87,7 +102,8 @@ public class MsfQuickBuildMoba
         var path = GetPath();
         if (!string.IsNullOrEmpty(path))
         {
-            BuildMasterAndSpawner(path);
+            BuildMaster(path);
+            BuildSpawner(path);
         }
     }
 
