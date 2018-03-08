@@ -22,7 +22,8 @@ public class UI_PowerButton : MonoBehaviour {
 	}
 	public void setEnabled(bool value)
 	{
-		icon.SetActive(value);
+		if(icon!=null)
+			icon.SetActive(value);
 		keyText.enabled = value;
 		countDownText.enabled = value;
 	}

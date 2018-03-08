@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class Health : NetworkBehaviour { //MonoBehaviour {
   public delegate void HealthChanged(int health);
   public event HealthChanged healthChange;
-  public int maxHealth = 100;
+  public int maxHealth = 1;
 
   [SyncVar(hook = "OnChangeHealth")]
   public int currentHealth;

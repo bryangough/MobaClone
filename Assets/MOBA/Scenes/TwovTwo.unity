@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 1589176428259484, guid: a792ae2bc3e784f30a12ba20a6c1d0e8,
     type: 2}
-  m_AutoCreatePlayer: 1
+  m_AutoCreatePlayer: 0
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
   m_OnlineScene: 
@@ -1152,6 +1152,7 @@ MonoBehaviour:
   leftStartPoint: {fileID: 1637146185}
   rightStartPoint: {fileID: 183063938}
   numberOfPlayers: 0
+  GameRoom: {fileID: 0}
 --- !u!114 &650349440
 MonoBehaviour:
   m_ObjectHideFlags: 0

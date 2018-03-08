@@ -14,7 +14,7 @@ public class CombatHandler : NetworkBehaviour
 
 	public delegate void TargetChanged();
     public event TargetChanged targetChanged;
-	[SyncVar(hook = "OnDeactivate")]
+	[SyncVar(hook = "isActiveHook")]
 	public bool isActive = true;
 	//
 	public TurretHandler turretHandler;
@@ -356,7 +356,7 @@ public class CombatHandler : NetworkBehaviour
 			turretHandler.fireCannon();
 		}
 	}
-	void OnDeactivate(bool isActive)
+	void isActiveHook(bool isActive)
 	{
 //		Debug.Log("On deactivate. "+isActive);
 		this.gameObject.SetActive(isActive);
