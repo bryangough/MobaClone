@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class Health : NetworkBehaviour { //MonoBehaviour {
   public delegate void HealthChanged(int health);
   public event HealthChanged healthChange;
-  public int maxHealth = 1;
+  public int maxHealth = 100;
 
   [SyncVar(hook = "OnChangeHealth")]
   public int currentHealth;
@@ -25,23 +25,17 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
   //SyncVar may not be ready for this
   void Start()
   {
-    currentHealth = maxHealth;
-    if( healthBarGameObject != null)
+    reset();
+  }
+
+  [Server]
+  void Update()
+  {
+    if (currentHealth <= 0)
     {
-      GameObject bar = ObjectPool.instance.GetObjectForType(healthBarGameObject);
-      if( bar != null)
-      {
-        FollowObject follow = bar.GetComponent<FollowObject>();
-        if( follow != null )
-        {
-          follow.setFollowing(this.gameObject);
-        }
-        healthBar = bar.GetComponent<BarControl>();
-      }
-      
+      print("dead");
+      RpcShowDeath();
     }
-    if(healthBar!=null)
-      healthBar.setPercent(currentHealth, maxHealth);
   }
 
   public bool takeDamage(int amount, GameObject attacker)
@@ -54,12 +48,13 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
           {
               currentHealth = 0;
               RpcShowDeath();
-              //Destroy(gameObject);
+              Destroy(gameObject);
           }
           else
           {
               currentHealth = 0;
               RpcShowDeath();
+              // if player then respawn?
           }
           if( attacker!= null )
           {
@@ -92,13 +87,27 @@ public class Health : NetworkBehaviour { //MonoBehaviour {
     {
       ObjectPool.instance.PoolObject(healthBar.gameObject);
     }
+  }
 
-    if (isLocalPlayer)
+  public void reset()
+  {
+    currentHealth = maxHealth;
+        currentHealth = maxHealth;
+    if( healthBarGameObject != null)
     {
-        
-        //return to spawn, start repawn timer
-        // move back to zero location
-        //transform.position = Vector3.zero;
+      GameObject bar = ObjectPool.instance.GetObjectForType(healthBarGameObject);
+      if( bar != null)
+      {
+        FollowObject follow = bar.GetComponent<FollowObject>();
+        if( follow != null )
+        {
+          follow.setFollowing(this.gameObject);
+        }
+        healthBar = bar.GetComponent<BarControl>();
+      }
+      
     }
+    if(healthBar!=null)
+      healthBar.setPercent(currentHealth, maxHealth);
   }
 }

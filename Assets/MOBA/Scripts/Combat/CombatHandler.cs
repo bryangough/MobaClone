@@ -6,12 +6,15 @@ using UnityEngine.Networking;
 public class CombatHandler : NetworkBehaviour 
 {
 	[SyncVar]
+	public bool isPlayer = false;
+	[SyncVar]
 	public Team team;
 	public LayerMask myTeamLayerMask;
 	public LayerMask otherTeamLayerMask;
 	//
-	
-
+	[SyncVar]
+	public GameObject spawnPoint;
+	//
 	public delegate void TargetChanged();
     public event TargetChanged targetChanged;
 	[SyncVar(hook = "isActiveHook")]
@@ -360,8 +363,19 @@ public class CombatHandler : NetworkBehaviour
 	{
 //		Debug.Log("On deactivate. "+isActive);
 		this.gameObject.SetActive(isActive);
-	}
+		if( isPlayer )
+		{
 
+		}
+	}
+	public void startRespawn()
+	{
+		MovementHandler movementHandler = this.GetComponent<MovementHandler>();
+		movementHandler.resetToLocation(spawnPoint.transform);
+
+		Health health = this.GetComponent<Health>();	
+		health.reset();
+	}
 	
 }
 /*

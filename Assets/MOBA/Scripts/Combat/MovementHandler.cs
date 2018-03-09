@@ -56,6 +56,24 @@ public class MovementHandler : NetworkBehaviour {
 		}
 	}
 
+	public void resetToLocation(Transform toLocation)
+	{
+		this.targetLocation = toLocation.position;
+		this.target = null;
+		stopMoving();
+
+		if(useRigidbody)
+		{
+			//thisRigidbody.position = toLocation;
+			transform.position = toLocation.position;
+			thisRigidbody.angularVelocity = 0;
+			thisRigidbody.velocity = Vector3.zero;
+		}
+		else
+		{
+			transform.position = toLocation.position;
+		}
+	}
 	
 
 

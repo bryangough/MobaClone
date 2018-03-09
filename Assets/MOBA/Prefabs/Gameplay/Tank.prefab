@@ -214,6 +214,7 @@ MonoBehaviour:
   otherTeamLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  spawnPoint: {fileID: 0}
   isActive: 1
   turretHandler: {fileID: 0}
   firePoint: {fileID: 1092713801382068}

@@ -15,6 +15,7 @@ public class AiController : NetworkBehaviour {
 	public float delayCounter = 0;
 	public float checkDelay = 1f;
 	// Use this for initialization
+	[Server]
 	void Start () {
 		if( !isServer )
 		{
@@ -26,6 +27,7 @@ public class AiController : NetworkBehaviour {
 		movementHandler = this.GetComponent<MovementHandler>();
 		
 	}
+	[Server]
 	void Update () 
 	{
 		if( !isServer )

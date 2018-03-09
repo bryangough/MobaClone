@@ -1335,6 +1335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9db3673a3864b61a00afd1d87cc921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   team: 0
   myTeamLayerMask:
     serializedVersion: 2
@@ -1342,6 +1343,7 @@ MonoBehaviour:
   otherTeamLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  spawnPoint: {fileID: 0}
   isActive: 1
   turretHandler: {fileID: 0}
   firePoint: {fileID: 0}
@@ -5522,6 +5524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9db3673a3864b61a00afd1d87cc921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   team: 1
   myTeamLayerMask:
     serializedVersion: 2
@@ -5529,6 +5532,7 @@ MonoBehaviour:
   otherTeamLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  spawnPoint: {fileID: 0}
   isActive: 1
   turretHandler: {fileID: 0}
   firePoint: {fileID: 0}
